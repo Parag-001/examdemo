@@ -1,10 +1,14 @@
 import React from 'react'
-import SignUp from './Component/SignUp'
+import { BrowserRouter } from 'react-router-dom'
 import './App.css'
+// import Main from './Route/Main'
+import AllRoute from './Route/allRoute'
 const App = () => {
   return (
     <>
-    <SignUp />
+      <BrowserRouter>
+          <AllRoute />
+      </BrowserRouter>
     </>
   )
 }

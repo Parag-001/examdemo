@@ -1,31 +1,43 @@
 import React from "react";
-import { ChangeData } from "../Redux/Action/Action";
-import { useDispatch } from "react-redux";
-
+import { ChangeData, errorHandle } from "../Redux/Action/SignUpaction";
+import { useDispatch, useSelector } from "react-redux";
+import Validation from "../users/Validation";
 const FormInput = (prop) => {
-  const { name, type, place, Label } = prop;
-  const dispatch = useDispatch();
+  const { name, type, place, Label, error } = prop;
 
+  const dispatch = useDispatch();
+  const { val, eror } = useSelector((stat) => stat.SignUp);
+  // console.log("val :>> ", val);
+  const handleChange = (e) => {
+    dispatch(
+      errorHandle({ [name]: Validation(e.target.name, e.target.value, val) })
+    );
+    dispatch(ChangeData(e.target.value, name));
+  };
   const element =
     prop.element === "input" ? (
       <div className="form-group mb-3">
         <label htmlFor="">{Label}</label>
         <input
           type={type}
-          name={type}
-          onChange={(e) => dispatch(ChangeData(e.target.value, name))}
+          name={name}
+          error={error}
+          value={val?.[name]}
+          onChange={handleChange}
           autoComplete="off"
           placeholder={place}
           className="form-control"
         />
+        <p className="text-danger">{eror[name]}</p>
       </div>
     ) : (
       <div className="form-group mb-3">
         <label htmlFor="">{Label}</label>
         <select
           name={name}
+          value={val?.[name]}
           className="form-select"
-          onChange={(e) => dispatch(ChangeData(e.target.value, name))}
+          onChange={handleChange}
         >
           {prop.val.map((cur) => {
             return (

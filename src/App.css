@@ -2,3 +2,26 @@
   margin: 11% 36% ;
   border-radius: 20px;
 }
+
+.navbar {
+  top: 0;
+  background: rgb(183, 85, 183);
+  height: 10vh;
+  align-items: center;
+}
+
+.ul {
+  display: flex;
+}
+
+li {
+  list-style: none;
+  padding: 30px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.navlinks {
+  text-decoration: none;
+  color: black;
+}

@@ -1,6 +1,16 @@
+const user = {
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    confirmpass: ""
+}
+
 const initialData = {
-    val: "",
-    data: []
+    val: {...user},
+    data: [],
+    userslist: [],
+    eror: {},
 }
 
 const SignUp = (state = initialData, action) => {
@@ -11,13 +21,25 @@ const SignUp = (state = initialData, action) => {
                 val: {
                     ...state.val,
                       [action.payload.name]: action.payload.value
-                }
+                },
             }
         case "SUBMIT":
-            document.forms[0].reset()
             return {
                 ...state,
-                data: [ ...state.data, state.val ],
+                data: [...state.data, state.val],
+                userslist: [...state.userslist, action.payload],
+                // val: initialData,
+                isLogin: true
+            }
+        case "ERROR":
+            return {
+                ...state,
+                eror: action.payload
+            }
+        case "RESET":
+            return {
+                ...state,
+                val: {...user}
             }
         default: return state
     }
