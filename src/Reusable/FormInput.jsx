@@ -3,11 +3,10 @@ import { ChangeData, errorHandle } from "../Redux/Action/SignUpaction";
 import { useDispatch, useSelector } from "react-redux";
 import Validation from "../users/Validation";
 const FormInput = (prop) => {
-  const { name, type, place, Label, error } = prop;
+  const { name, type, place, Label, error, nameclass } = prop;
 
   const dispatch = useDispatch();
   const { val, eror } = useSelector((stat) => stat.SignUp);
-  // console.log("val :>> ", val);
   const handleChange = (e) => {
     dispatch(
       errorHandle({ [name]: Validation(e.target.name, e.target.value, val) })
@@ -26,7 +25,7 @@ const FormInput = (prop) => {
           onChange={handleChange}
           autoComplete="off"
           placeholder={place}
-          className="form-control"
+          className={nameclass}
         />
         <p className="text-danger">{eror[name]}</p>
       </div>
@@ -36,7 +35,7 @@ const FormInput = (prop) => {
         <select
           name={name}
           value={val?.[name]}
-          className="form-select"
+          className={nameclass}
           onChange={handleChange}
         >
           {prop.val.map((cur) => {

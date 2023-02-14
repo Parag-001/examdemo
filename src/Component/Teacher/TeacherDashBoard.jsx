@@ -1,9 +1,10 @@
 import React from "react";
-import Main from "../../Route/Main";
+import { useSelector } from "react-redux";
 const TeacherDashBoard = () => {
+  const { data } = useSelector((stat) => stat.Login);
   return (
     <>
-      <Main />
+      <h1 className="text-center">Welcome {data.name}</h1>
     </>
   );
 };

@@ -25,3 +25,32 @@ li {
   text-decoration: none;
   color: black;
 }
+td{
+  text-align: center;
+  align-items: center;
+}
+.exam{
+  background-color: aliceblue;
+  width: 50%;
+  padding: 20px;
+  margin: 6% 0% 0% 25%;
+}
+.exam-input{
+  width: 100%;
+  border: none;
+  background-color: aliceblue;
+  border-bottom: 1px solid black;
+  outline: none;
+  padding: 10px;
+}
+.exam-input-option{
+    width: 40%;
+    border: none;
+    background-color: aliceblue;
+    border-bottom: 1px solid black;
+    outline: none;
+    padding: 10px;
+}
+.selectSubject{
+  margin: 3% 48%;
+}

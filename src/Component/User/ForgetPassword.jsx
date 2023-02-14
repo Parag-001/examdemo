@@ -20,6 +20,7 @@ const ForgetPassword = () => {
             element="input"
             place="Enter Your email Here "
             name="email"
+            nameclass="form-control"
           />
           <div className="form-group text-center my-4">
             <button className="btn btn-info" type="submit">

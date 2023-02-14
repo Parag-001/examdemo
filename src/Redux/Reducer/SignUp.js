@@ -3,12 +3,20 @@ const user = {
     email: "",
     password: "",
     role: "",
-    confirmpass: ""
+    subName: "",
+    confirmpass: "",
+    question: "",
+    answer: "",
+    option1 : "",
+    option2 : "",
+    option3 : "",
+    option4 : ""
 }
 
 const initialData = {
     val: {...user},
     data: [],
+    qno: 1,
     userslist: [],
     eror: {},
 }
@@ -28,7 +36,6 @@ const SignUp = (state = initialData, action) => {
                 ...state,
                 data: [...state.data, state.val],
                 userslist: [...state.userslist, action.payload],
-                // val: initialData,
                 isLogin: true
             }
         case "ERROR":
@@ -39,7 +46,7 @@ const SignUp = (state = initialData, action) => {
         case "RESET":
             return {
                 ...state,
-                val: {...user}
+                val: {  name: "",  email: "", password: "",role: "",  confirmpass: "",   question: "",  answer: "",   option1 : "", option2 : "", option3 : "", option4 : ""},
             }
         default: return state
     }

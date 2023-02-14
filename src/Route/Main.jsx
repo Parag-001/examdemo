@@ -12,7 +12,7 @@ const Main = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className="navlinks" to="/login">
+            <NavLink className="navlinks" to="/createexam">
               Create Exam
             </NavLink>
           </li>

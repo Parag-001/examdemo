@@ -26,7 +26,6 @@ export const handleSubmit = (nav) => {
             }
         })
         const res = await data.json()
-        console.log('res', res)
         if (res.statusCode === 200) {
             swal("Ohh yes", res.message,"success")
             nav("/login")

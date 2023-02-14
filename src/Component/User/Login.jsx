@@ -23,6 +23,7 @@ const Login = () => {
             element="input"
             place="Enter Your email Here "
             name="email"
+            nameclass="form-control"
           />
           <FormInput
             Label="Password : "
@@ -30,6 +31,7 @@ const Login = () => {
             element="input"
             place="Enter Your Password Here "
             name="password"
+            nameclass="form-control"
           />
           <div className="form-group text-end">
             <NavLink
@@ -41,7 +43,7 @@ const Login = () => {
           </div>
           <div className="form-group text-center my-4">
             <button className="btn btn-info" type="submit">
-              Sign Up
+              Login
             </button>
           </div>
           <div className="form-group text-center">

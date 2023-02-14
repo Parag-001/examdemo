@@ -20,6 +20,23 @@ const Validation = (name, value, val) => {
       return value.valueOf() === "select" ? "Please Enter Value" : "";
     case "confirmpass":
       return val.password === value ? "" : "Please Enter same Password";
+    case "question":
+      return value.length < 4 ? "Question Length Is Too Short" : "";
+    case "option1":
+      return value.length < 2 ? "Option Length Is Too Short" : "";
+    case "option2":
+      return value.length < 2 ? "Option Length Is Too Short" : "";
+    case "option3":
+      return value.length < 2 ? "Option Length Is Too Short" : "";
+    case "option4":
+      return value.length < 2 ? "Option Length Is Too Short" : "";
+    case "answer":
+      return val.option1 === value ||
+        val.option2 === value ||
+        val.option3 === value ||
+        val.option4 === value
+        ? ""
+        : "Please Give Correct Option";
     default:
       break;
   }

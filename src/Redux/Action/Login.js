@@ -27,6 +27,5 @@ export const handleLogin = (navigate) => {
              type: "LOGIN",
              payload: res.data
          })
-    }
-   
+    }   
 }

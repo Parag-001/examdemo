@@ -1,21 +1,25 @@
 import React from "react";
 import { useEffect } from "react";
 import Main from "../../Route/Main";
-import { StudentDataShow } from "../../Redux/Action/StudentData";
+import {
+  StudentDataShow,
+  Particular_Data,
+} from "../../Redux/Action/StudentData";
 import { useDispatch, useSelector } from "react-redux";
 import { BallTriangle } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 const StudentData = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { datalist, loading } = useSelector((stat) => stat.StudentDataShow);
   useEffect(() => {
     dispatch(StudentDataShow());
   }, []);
-  const viewDetail = (e) => {
-    e.preventDefault();
+  const viewDetail = (i) => {
+    dispatch(Particular_Data(i, navigate));
   };
   return (
     <>
-      <Main />
       <div className="container">
         <h3 className="text-center my-4">Student Data</h3>
         <table className="table">
@@ -40,7 +44,7 @@ const StudentData = () => {
                       onClick={() => viewDetail(cur._id)}
                     >
                       View Data
-                    </button>{" "}
+                    </button>
                   </td>
                 </tr>
               );

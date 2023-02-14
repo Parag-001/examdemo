@@ -23,6 +23,7 @@ const NewPass = () => {
             type="password"
             place="Enter Your Name Here "
             name="password"
+            nameclass="form-control"
           />
           <FormInput
             Label=" Confirm Password : "
@@ -30,6 +31,7 @@ const NewPass = () => {
             element="input"
             place="Enter Your email Here "
             name="confirmpass"
+            nameclass="form-control"
           />
           <div className="form-group text-center my-4">
             <button className="btn btn-info" type="submit">

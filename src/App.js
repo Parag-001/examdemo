@@ -3,10 +3,12 @@ import { BrowserRouter } from 'react-router-dom'
 import './App.css'
 // import Main from './Route/Main'
 import AllRoute from './Route/allRoute'
+import Main from './Route/Main'
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <Main />
           <AllRoute />
       </BrowserRouter>
     </>

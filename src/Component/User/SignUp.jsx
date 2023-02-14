@@ -29,6 +29,7 @@ const SignUp = () => {
             error={eror}
             place="Enter Your Name Here "
             name="name"
+            nameclass="form-control"
           />
           <FormInput
             Label="Email : "
@@ -37,6 +38,7 @@ const SignUp = () => {
             element="input"
             place="Enter Your email Here "
             name="email"
+            nameclass="form-control"
           />
           <FormInput
             Label="Password : "
@@ -45,10 +47,12 @@ const SignUp = () => {
             element="input"
             place="Enter Your Password Here "
             name="password"
+            nameclass="form-control"
           />
           <FormInput
             Label="Role : "
             name="role"
+            nameclass="form-select"
             error={eror}
             element="select"
             val={["select", "teacher", "student"]}
