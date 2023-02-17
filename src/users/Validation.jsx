@@ -7,6 +7,7 @@ const Validation = (name, value, val) => {
         : value.match(txt)
         ? "Number Are Not Allowed"
         : "";
+
     case "email":
       var exp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-Z0-9]{2,4}$/;
       return value.length < 4
@@ -23,13 +24,37 @@ const Validation = (name, value, val) => {
     case "question":
       return value.length < 4 ? "Question Length Is Too Short" : "";
     case "option1":
-      return value.length < 2 ? "Option Length Is Too Short" : "";
+      return value.length < 2
+        ? "Option Length Is Too Short"
+        : val.option2 === value ||
+          val.option3 === value ||
+          val.option4 === value
+        ? "Not Entered Same Value Option"
+        : "";
     case "option2":
-      return value.length < 2 ? "Option Length Is Too Short" : "";
+      return value.length < 2
+        ? "Option Length Is Too Short"
+        : val.option1 === value ||
+          val.option3 === value ||
+          val.option4 === value
+        ? "Not Entered Same Value Option"
+        : "";
     case "option3":
-      return value.length < 2 ? "Option Length Is Too Short" : "";
+      return value.length < 2
+        ? "Option Length Is Too Short"
+        : val.option1 === value ||
+          val.option2 === value ||
+          val.option4 === value
+        ? "Not Entered Same Value Option"
+        : "";
     case "option4":
-      return value.length < 2 ? "Option Length Is Too Short" : "";
+      return value.length < 2
+        ? "Option Length Is Too Short"
+        : val.option1 === value ||
+          val.option2 === value ||
+          val.option3 === value
+        ? "Not Entered Same Value Option"
+        : "";
     case "answer":
       return val.option1 === value ||
         val.option2 === value ||
@@ -37,6 +62,8 @@ const Validation = (name, value, val) => {
         val.option4 === value
         ? ""
         : "Please Give Correct Option";
+    case "note":
+      return value.length < 3 ? "Please Enter Valid Note" : "";
     default:
       break;
   }

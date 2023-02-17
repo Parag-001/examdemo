@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import CreateExam1 from "../../Reusable/CreateExam";
 import Exam from "../../Reusable/Exam";
 import FormInput from "../../Reusable/FormInput";
+import Main from "../../Route/Main";
 
 const CreateExam = () => {
-  const { questions, questionno, questionData } = useSelector(
+  const { questions, questionno, examData } = useSelector(
     (stat) => stat.ExamData
   );
-  console.log("quesionData :>> ", questionData);
-  const { question, option1, option2, option3, option4, answer } = questions;
+  console.log("examData", examData);
   const comp = (
     // <Exam
     //   quesno={questionno}
@@ -55,7 +55,6 @@ const CreateExam = () => {
 
   return (
     <>
-      <h2 className="text-center">Create Exam</h2>
       <div className="container">
         <div className="exam">
           <FormInput
@@ -65,17 +64,18 @@ const CreateExam = () => {
               questionno > 1 ? "disabled" : null
             }`}
             val={[
-              "select",
+              "select-subject",
               "Maths",
               "Science",
               "English",
               "Social Science",
               "Gujrati",
               "Sanskrit",
-              "a",
-              "b",
+              "a+",
+              "b++",
             ]}
           />
+
           {element}
         </div>
       </div>

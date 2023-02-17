@@ -22,7 +22,7 @@ const StudentData = () => {
     <>
       <div className="container">
         <h3 className="text-center my-4">Student Data</h3>
-        <table className="table">
+        <table className="table table-bordered">
           <thead>
             <tr>
               <th>Student Name </th>

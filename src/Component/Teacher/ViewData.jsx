@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Main from "../../Route/Main";
 const ViewData = () => {
   const { viewData } = useSelector((stat) => stat.StudentDataShow);
-  console.log("data :>> ", viewData);
   return (
     <>
       <h3 className="text-center">View Student Data</h3>
       <div className="container">
-        <table className="table">
+        <table className="table table-bordered">
           <thead>
             <tr>
               <th>NAME</th>

@@ -11,7 +11,9 @@ const initialData = {
     questions: {...AllData},
     questionno: 1,
     questionData: [],
-    notes: []
+    notes: [],
+    examData: [],
+    singleExamData: []
 }
 const ExamData = (state = initialData, action) => {
     switch (action.type) {
@@ -23,12 +25,18 @@ const ExamData = (state = initialData, action) => {
                     [action.payload.name] : action.payload.value
                 }
             }
-        // case "SUBMIT_QUESTION":
-        //     return {
-        //         ...state,
-        //         questionData: [...state.questionData, action.payload],
-        //         questionno: state.questionno + 1
-        //     }
+        case "SUBMIT_EXAM_DATA":
+            console.log('action.payload', action.payload)
+            return {
+                ...state,
+                examData: [...state.examData, action.payload],
+                questionno: state.questionno + 1
+            }
+        case "VIEW_EXAM_DATA":
+            return {
+                ...state,
+                singleExamData: [...state.singleExamData,action.payload]
+            }
         case "RESET_EXAM": 
             return {
                 ...state,

@@ -8,7 +8,6 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Main />
           <AllRoute />
       </BrowserRouter>
     </>

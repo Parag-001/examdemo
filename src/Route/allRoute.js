@@ -10,6 +10,10 @@ import ForgetPassword from '../Component/User/ForgetPassword'
 import NewPass from '../Component/User/NewPass'
 import StudentData from '../Component/Teacher/StudentData'
 import CreateExam from '../Component/Teacher/CreateExam'
+import SlideBar from '../Component/Util/SlideBar'
+import StudentSlide from '../Component/Util/StudentSlide'
+import ViewExam from '../Component/Teacher/ViewExam'
+import ViewExamData from '../Component/Teacher/ViewExamData'
 
 const AllRoute = () => {
         let data = useRoutes([
@@ -23,11 +27,11 @@ const AllRoute = () => {
             },
             {
                 path: "/teacherdashboard",
-                element: < ><TeacherDashBoard /></>,
+                element: <SlideBar ><TeacherDashBoard /></SlideBar>,
             },
             {
                 path: "/student",
-                element: <Protected ><StudentDashBoards /></Protected>,
+                element: <Protected ><StudentSlide><StudentDashBoards /></StudentSlide> </Protected>,
             },
             {
                 path: "/ForgetPassword",
@@ -39,15 +43,27 @@ const AllRoute = () => {
             },
             {
                 path: "/studentData",
-                element: <StudentData />,
+                element: <> <SlideBar ><StudentData /></SlideBar></>,
             },
             {
                 path: "/viewdata",
-                element: <ViewData />,
+                element:  <> <SlideBar ><ViewData /></SlideBar></>,
             },
             {
                 path: "/createexam",
-                element: <CreateExam />,
+                element: <> <SlideBar ><CreateExam /></SlideBar></> ,
+            },
+            {
+                path: "/viewexam",
+                element: <> <SlideBar ><ViewExam /></SlideBar></> ,
+            },
+            {
+                path: "/viewexamdata",
+                element: <> <SlideBar ><ViewExamData /></SlideBar></> ,
+            },
+            {
+                path: "/slide",
+                element: <SlideBar />,
             },
             {
                 path: "*",

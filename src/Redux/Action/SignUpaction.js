@@ -45,8 +45,19 @@ export const errorHandle = (val) => {
         payload: val
     }
 }
+export const ClickVali = (val) => {
+    return {
+        type: "CLICK",
+        payload: val
+    }
+}
 export const ResetForm = () => {
     return {
         type: "RESET",
+    }
+}
+export const Logout = () => {
+    return {
+        type: "LOGOUT",
     }
 }

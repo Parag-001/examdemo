@@ -10,7 +10,8 @@ const user = {
     option1 : "",
     option2 : "",
     option3 : "",
-    option4 : ""
+    option4: "",
+    note: "",
 }
 
 const initialData = {
@@ -19,6 +20,7 @@ const initialData = {
     qno: 1,
     userslist: [],
     eror: {},
+    er: {}
 }
 
 const SignUp = (state = initialData, action) => {
@@ -47,6 +49,18 @@ const SignUp = (state = initialData, action) => {
             return {
                 ...state,
                 val: {  name: "",  email: "", password: "",role: "",  confirmpass: "",   question: "",  answer: "",   option1 : "", option2 : "", option3 : "", option4 : ""},
+            }
+        case "LOGOUT": 
+            return {
+                ...state,
+                isLogin: false
+            }
+        case "CLICK": 
+            return {
+                ...state,
+                eror: {
+                    "name": action.payload[0],"email" : action.payload[1],"password" : action.payload[2],"role" : action.payload[3],"subName" : action.payload[4],"confirmpass" : action.payload[5],"question" : action.payload[6],"answer" : action.payload[7],"option1" : action.payload[8],"option2" : action.payload[9],"option3" : action.payload[10],"option4" : action.payload[11]
+                }
             }
         default: return state
     }
