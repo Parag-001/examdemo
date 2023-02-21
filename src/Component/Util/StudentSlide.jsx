@@ -2,7 +2,7 @@ import React from "react";
 import { GiTeacher } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Logout } from "../../Redux/Action/SignUpaction";
+import { Logout } from "../../Redux/Action/Login";
 
 const StudentSlide = ({ children }) => {
   const dispatch = useDispatch();

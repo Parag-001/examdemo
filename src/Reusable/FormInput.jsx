@@ -1,8 +1,13 @@
 import React from "react";
-import { ChangeData, errorHandle } from "../Redux/Action/SignUpaction";
+import {
+  ChangeData,
+  errorHandle,
+  Previous,
+} from "../Redux/Action/SignUpaction";
 import { useDispatch, useSelector } from "react-redux";
 import Validation from "../users/Validation";
-// import ClickValidation from "../users/ClickVali";
+import { ChangeExamData } from "../Redux/Action/CreateExam";
+
 const FormInput = (prop) => {
   const {
     name,
@@ -13,21 +18,21 @@ const FormInput = (prop) => {
     nameclass,
     disabled,
     inputdisabled,
+    require,
+    valname,
+    click,
   } = prop;
 
   const dispatch = useDispatch();
   const { val, eror } = useSelector((stat) => stat.SignUp);
-  // console.log(
-  //   "Object.",
+  const { pre_val, prev_bool, questionno, questionData } = useSelector(
+    (stat) => stat.ExamData
+  );
 
-  //   Object.entries(val).map(([key, value]) =>
-  //     errorHandle({ [key]: Validation(key, value, val) })
-  //   )
-  // );
   const handleChange = (e) => {
-    dispatch(
-      errorHandle({ [name]: Validation(e.target.name, e.target.value, val) })
-    );
+    dispatch(errorHandle(name, Validation(e.target.name, e.target.value, val)));
+    dispatch(ChangeExamData());
+    // dispatch(Previous(e.target.name, pre_val[questionno - 1]?.[name]));
     dispatch(ChangeData(e.target.value, name));
   };
   const element =
@@ -36,10 +41,12 @@ const FormInput = (prop) => {
         <label htmlFor="">{Label}</label>
         <input
           type={type}
-          required
+          // required={require}
           name={name}
           error={error}
-          value={val?.[name]}
+          value={
+            (prev_bool ? pre_val[questionno - 1]?.[name] : "") || val?.[name]
+          }
           onChange={handleChange}
           disabled={disabled}
           autoComplete="off"
@@ -58,10 +65,12 @@ const FormInput = (prop) => {
         />
         <input
           type={type}
-          required
+          // required
           name={name}
           error={error}
-          value={val?.[name]}
+          value={
+            (prev_bool ? pre_val[questionno - 1]?.[name] : "") || val?.[name]
+          }
           onChange={handleChange}
           autoComplete="off"
           disabled={inputdisabled}
@@ -70,6 +79,13 @@ const FormInput = (prop) => {
         />
         <p className="text-danger">{eror[name]}</p>
       </div>
+    ) : prop.element === "button" ? (
+      <input
+        type={type}
+        onClick={click}
+        className={nameclass}
+        value={valname}
+      />
     ) : (
       <div className="form-group mb-3">
         <label htmlFor="">{Label}</label>

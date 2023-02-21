@@ -1,8 +1,9 @@
 import React from "react";
+import { BallTriangle } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 
 const ViewExamData = () => {
-  const { singleExamData } = useSelector((stat) => stat.ExamData);
+  const { singleExamData, loading } = useSelector((stat) => stat.ExamData);
   console.log("singleExamData", singleExamData);
   return (
     <>
@@ -17,17 +18,23 @@ const ViewExamData = () => {
             </tr>
           </thead>
           <tbody>
-            {singleExamData.map((c, ind) => {
-              return c.questions.map((a) => {
+            {singleExamData.map((c) => {
+              return c.questions.map((a, ind) => {
                 return (
                   <tr key={ind}>
                     <td>{a.question}</td>
                     <td>
-                      {a.options.map((s, ind) => {
+                      {a.options.map((s, no) => {
                         return (
-                          <tr>
-                            <td>{s}</td>
-                          </tr>
+                          <td
+                            key={no}
+                            style={{
+                              display: "grid",
+                              gridTemplateColumns: "1",
+                            }}
+                          >
+                            {s}
+                          </td>
                         );
                       })}
                     </td>
@@ -38,6 +45,11 @@ const ViewExamData = () => {
             })}
           </tbody>
         </table>
+        {loading && (
+          <>
+            <BallTriangle /> <h1>Loading data...</h1>
+          </>
+        )}
       </div>
     </>
   );

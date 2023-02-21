@@ -20,7 +20,9 @@ export const handleLogin = (navigate) => {
          } else {
             dispatch(ResetForm())
              res.data.role === "teacher" ? navigate("/teacherdashboard"): navigate("/student")
-            localStorage.setItem("token", JSON.stringify(res.data.token));
+             localStorage.setItem("token", JSON.stringify(res.data.token));
+             localStorage.setItem("Login", JSON.stringify(true))
+             localStorage.setItem("role", JSON.stringify(res.data.role))
              swal("Great", res.message, "success")
          }
         dispatch({
@@ -28,4 +30,12 @@ export const handleLogin = (navigate) => {
              payload: res.data
          })
     }   
+}
+
+export const Logout = () => {
+    localStorage.setItem("Login",JSON.stringify(false) )
+    return {
+        type: "LOGOUT",
+
+    }
 }

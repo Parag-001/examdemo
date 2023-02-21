@@ -17,8 +17,8 @@ const Validation = (name, value, val) => {
         : "Enter Valid Email";
     case "password":
       return value.length < 6 ? "Please Enter Password Minimum length 6" : "";
-    case "role":
-      return value.valueOf() === "select" ? "Please Enter Value" : "";
+    // case "role":
+    //   return value.valueOf() === "select" ? "Please Enter Value" : "";
     case "confirmpass":
       return val.password === value ? "" : "Please Enter same Password";
     case "question":

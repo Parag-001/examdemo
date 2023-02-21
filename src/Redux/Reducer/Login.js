@@ -1,7 +1,5 @@
-
 const initialData = {
-    data: [],
-    isLogin: false
+    data: []
 }
 const Login = (state= initialData, action) => {
     switch (action.type) {
@@ -9,7 +7,11 @@ const Login = (state= initialData, action) => {
             return {
                 ...state,
                 data: action.payload,
-                isLogin: true
+            }
+          case "LOGOUT": 
+            return {
+                ...state,
+                isLogin: false
             }
         default: return state
     }

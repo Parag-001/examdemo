@@ -14,9 +14,11 @@ import SlideBar from '../Component/Util/SlideBar'
 import StudentSlide from '../Component/Util/StudentSlide'
 import ViewExam from '../Component/Teacher/ViewExam'
 import ViewExamData from '../Component/Teacher/ViewExamData'
+import { useSelector } from 'react-redux'
 
 const AllRoute = () => {
-        let data = useRoutes([
+    const data = localStorage.getItem("role")
+        let data1 = useRoutes([
             {
                 path: "/",
                 element: <SignUp/>,
@@ -30,10 +32,6 @@ const AllRoute = () => {
                 element: <SlideBar ><TeacherDashBoard /></SlideBar>,
             },
             {
-                path: "/student",
-                element: <Protected ><StudentSlide><StudentDashBoards /></StudentSlide> </Protected>,
-            },
-            {
                 path: "/ForgetPassword",
                 element: <><ForgetPassword /></>,
             },
@@ -43,35 +41,77 @@ const AllRoute = () => {
             },
             {
                 path: "/studentData",
-                element: <> <SlideBar ><StudentData /></SlideBar></>,
+                element: <Protected> <SlideBar ><StudentData /></SlideBar></Protected>,
             },
             {
                 path: "/viewdata",
-                element:  <> <SlideBar ><ViewData /></SlideBar></>,
+                element:  <Protected> <SlideBar ><ViewData /></SlideBar></Protected>,
             },
             {
                 path: "/createexam",
-                element: <> <SlideBar ><CreateExam /></SlideBar></> ,
+                element: <Protected> <SlideBar ><CreateExam /></SlideBar></Protected> ,
             },
             {
                 path: "/viewexam",
-                element: <> <SlideBar ><ViewExam /></SlideBar></> ,
+                element: <Protected> <SlideBar ><ViewExam /></SlideBar></Protected> ,
             },
             {
                 path: "/viewexamdata",
-                element: <> <SlideBar ><ViewExamData /></SlideBar></> ,
-            },
-            {
-                path: "/slide",
-                element: <SlideBar />,
+                element: <Protected> <SlideBar ><ViewExamData /></SlideBar></Protected> ,
             },
             {
                 path: "*",
-                element: <h1 className='text-center'> Page Not Found </h1>,
+                element: <SlideBar> <h1 className='text-center'> Page Not Found </h1></SlideBar>,
             },
 
         ])
-        return data
+     let data2 = useRoutes([
+    {
+      path: "/",
+      element: <SignUp />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/student",
+      element: (
+        <Protected>
+          <StudentSlide>
+            <StudentDashBoards />
+          </StudentSlide>
+        </Protected>
+      ),
+    },
+    {
+      path: "/ForgetPassword",
+      element: (
+        <>
+          <ForgetPassword />
+        </>
+      ),
+    },
+    {
+      path: "/newPassword",
+      element: <NewPass />,
+    },
+
+    {
+      path: "*",
+      element: (
+        <StudentSlide>
+          <h1 className="text-center"> Page Not Found </h1>{" "}
+        </StudentSlide>
+      ),
+    },
+  ]);
+  
+    if (JSON.parse(data) === "teacher") {
+      return data1
+    } else {
+    return data2
+  }
 }
 
 export default AllRoute

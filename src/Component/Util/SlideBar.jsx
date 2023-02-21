@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { GiTeacher } from "react-icons/gi";
-import { Logout } from "../../Redux/Action/SignUpaction";
+import { GrView } from "react-icons/gr";
+import { IoIosPeople, IoIosCreate } from "react-icons/io";
+import { Logout } from "../../Redux/Action/Login";
 import { useDispatch } from "react-redux";
 
 const SlideBar = ({ children }) => {
@@ -22,22 +24,25 @@ const SlideBar = ({ children }) => {
             style={{ height: "100vh", background: "lightgrey" }}
           >
             <ul>
-              <li>
+              <li className="mt-4">
                 <GiTeacher className="mx-3" />
                 Teacher
               </li>
               <li>
                 <NavLink className="navlinks" to="/studentData">
+                  <IoIosPeople className="mx-2" />
                   Student Data
                 </NavLink>
               </li>
               <li>
                 <NavLink className="navlinks" to="/createexam">
+                  <IoIosCreate className="mx-2" />
                   Create Exam
                 </NavLink>
               </li>
               <li>
                 <NavLink className="navlinks" to="/viewexam">
+                  <GrView className="mx-2" />
                   View Exam
                 </NavLink>
               </li>

@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Particular_Exam } from "../../Redux/Action/CreateExam";
+import { DeleteData, Particular_Exam } from "../../Redux/Action/CreateExam";
+import { FaTrashAlt } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
 
 const ViewExam = () => {
   const dispatch = useDispatch();
@@ -11,9 +13,12 @@ const ViewExam = () => {
   const handleData = (id) => {
     dispatch(Particular_Exam(id, navigate));
   };
+  const handleDelete = (id) => {
+    dispatch(DeleteData(id));
+  };
   return (
     <>
-      <h3 className="text-center">View Exam Data</h3>
+      <h3 className="text-center my-4">View Exam Data</h3>
       <div className="container">
         <table className="table table-bordered">
           <thead>
@@ -22,6 +27,7 @@ const ViewExam = () => {
               <th>SUBJECT</th>
               <th>NOTES</th>
               <th>DETAILS</th>
+              <th>Modify</th>
             </tr>
           </thead>
           <tbody>
@@ -38,6 +44,17 @@ const ViewExam = () => {
                     >
                       View Detail
                     </button>
+                  </td>
+                  <td>
+                    <FiEdit
+                      className="fs-4 mx-2"
+                      style={{ cursor: "pointer" }}
+                    />
+                    <FaTrashAlt
+                      className="fs-4 mx-3"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleDelete(c._id)}
+                    />
                   </td>
                 </tr>
               );

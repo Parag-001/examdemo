@@ -1,11 +1,13 @@
 import swal from 'sweetalert'
-export const ChangeData = (val, name) => {
+export const ChangeData = (val, name,prev_bool) => {
     return {
         type: "CHANGE",
         payload: {
             value: val,
             name: name,
-        }
+        },
+        prev_bool: prev_bool
+
     }
 }
 
@@ -39,10 +41,13 @@ export const handleSubmit = (nav) => {
         })
     }
 }
-export const errorHandle = (val) => {
+export const errorHandle = (name, val) => {
     return {
         type: "ERROR",
-        payload: val
+        payload: {
+            name: name,
+            val: val
+        }
     }
 }
 export const ClickVali = (val) => {
@@ -56,8 +61,10 @@ export const ResetForm = () => {
         type: "RESET",
     }
 }
-export const Logout = () => {
+export const Previous = (val) => {
     return {
-        type: "LOGOUT",
+        type: "PREV",
+        payload: val
     }
 }
+
