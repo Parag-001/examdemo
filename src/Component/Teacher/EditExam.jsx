@@ -1,36 +1,34 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CreateExam1 from "../../Reusable/CreateExam";
-
-import FormInput from "../../Reusable/FormInput";
+import EditExamData from "../../Reusable/EditExam";
+import FormInputEdit from "../../Reusable/FormInputEdit";
 
 const EditExam = () => {
-  const { questions, questionno, examData } = useSelector(
-    (stat) => stat.ExamData
-  );
-  const comp = <CreateExam1 />;
+  const { questionno, singleExamData } = useSelector((stat) => stat.ExamData);
+  const comp = <EditExamData />;
   const element = comp;
+
   return (
     <>
       <h1 className="text-center mt-3 text-success">Edit Exam</h1>
       <div className="container">
         <div className="exam">
-          <FormInput
+          <FormInputEdit
             name="subName"
             element="select"
             nameclass={`btn btn-primary mx-2 ${
-              questionno > 1 ? "disabled" : null
+              questionno > 0 ? "disabled" : null
             }`}
             val={[
               "select-subject",
-              "Math111",
-              "Sciece111",
-              "Englsh11",
-              "Socil Science11",
-              "Gujrat111",
-              "Sankrit11",
-              "ab-1",
-              "ba-1",
+              "first1",
+              "Sci11",
+              "Eng11",
+              "Social1",
+              "NewGuj",
+              "Some",
+              "ILTS",
+              "PTE",
             ]}
           />
 

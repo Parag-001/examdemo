@@ -8,7 +8,6 @@ export const allExamData = () => {
             }
         })
         const res = await data.json()
-        console.log('res.data', res.data)
         dispatch({
             type: "STUDENT_ALL_EXAM_DATA",
             payload: res.data

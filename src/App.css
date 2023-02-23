@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 .main-div-signup{
   margin: 11% 36% ;
   border-radius: 20px;
@@ -60,7 +63,11 @@ td{
 .selectSubject{
   margin: 3% 48%;
 }
-/* .comp{
-  background: rgb(226, 249, 245);
-  height: 100vh;
-} */
+.comp{
+  background: rgb(245, 255, 253);
+  height: 90vh;
+}
+.studdata{
+  overflow: scroll;
+  height: 88vh;
+}

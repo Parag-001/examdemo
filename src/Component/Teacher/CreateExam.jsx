@@ -17,7 +17,7 @@ const CreateExam = () => {
             name="subName"
             element="select"
             nameclass={`btn btn-primary mx-2 ${
-              questionno > 1 ? "disabled" : null
+              questionno > 0 ? "disabled" : null
             }`}
             val={[
               "select-subject",

@@ -1,6 +1,6 @@
 
 const initialData = {
-    subjectName: "",
+    subjectName: [],
     questionno: 0,
     questionData: [],
     notes: [],
@@ -10,20 +10,23 @@ const initialData = {
     loading: true,
     pre_val: [],
     prev_bool: false,
-    allExamData: []
+    allExamData: [],
+    Edit_bool: false,
+    singleData: []
 }
 const ExamData = (state = initialData, action) => {
     switch (action.type) {
         case "CHANGE_EXAM":
             return {
                 ...state,
-                prev_bool:  false
+                prev_bool: false,
+                Edit_bool: false
             }
         case "SUBMIT_EXAM_DATA":
             return {
                 ...state,
                 examData: [...state.examData, action.payload],
-                questionno: 1,
+                questionno: 0,
                 createExamData: [...state.questionData],
                 questionData: []
             }
@@ -31,7 +34,9 @@ const ExamData = (state = initialData, action) => {
             return {
                 ...state,
                 singleExamData: [...state.singleExamData, action.payload],
-                loading: false
+                singleData: action.single,
+                loading: false,
+                Edit_bool: true
             }
         // case "DELETE": 
         //     return {
@@ -41,6 +46,8 @@ const ExamData = (state = initialData, action) => {
         case "NEXT": 
             let b = [...state.pre_val]
             state.questionno !== -1 && b.splice(state.questionno, 1, action.value);
+            let c = [...state.singleData]
+            c.splice(state.questionno, 1, action.value);
         return { 
             ...state, 
                  subjectName: [...state.subjectName,action.subjectName],
@@ -48,6 +55,7 @@ const ExamData = (state = initialData, action) => {
                  questionno: state.questionno === 15 ? state.questionno : state.questionno + 1,
                  notes: [...state.notes, action.notes],
                  pre_val: state.questionno === 0 && state.pre_val.length === 0 ? [...state.pre_val, action.value] : b,
+                 singleData: c,
                  prev_bool: true
             } 
         case "PREVIOUS": 

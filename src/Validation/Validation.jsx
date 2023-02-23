@@ -17,8 +17,8 @@ const Validation = (name, value, val) => {
         : "Enter Valid Email";
     case "password":
       return value.length < 6 ? "Please Enter Password Minimum length 6" : "";
-    // case "role":
-    //   return value.valueOf() === "select" ? "Please Enter Value" : "";
+    case "role":
+      return value.length < 1 ? "Please Select Role" : "";
     case "confirmpass":
       return val.password === value ? "" : "Please Enter same Password";
     case "question":
@@ -56,12 +56,7 @@ const Validation = (name, value, val) => {
         ? "Not Entered Same Value Option"
         : "";
     case "answer":
-      return val.option1 === value ||
-        val.option2 === value ||
-        val.option3 === value ||
-        val.option4 === value
-        ? ""
-        : "Please Give Correct Option";
+      return value.length < 1 ? "Please Give Correct Option" : "";
     case "note":
       return value.length < 3 ? "Please Enter Valid Note" : "";
     default:

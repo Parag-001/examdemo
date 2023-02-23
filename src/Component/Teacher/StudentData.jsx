@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { BallTriangle } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import { Card } from "react-bootstrap";
 const StudentData = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,37 +20,35 @@ const StudentData = () => {
   };
   return (
     <>
-      <div className="container">
+      <div className="container studdata">
         <h3 className="text-center my-4">Student Data</h3>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>Student Name </th>
-              <th>Student Email </th>
-              <th>Student Status </th>
-              <th>View Student Detail </th>
-            </tr>
-          </thead>
-          <tbody>
-            {datalist.map((cur) => {
-              return (
-                <tr key={cur?._id}>
-                  <td>{cur.name}</td>
-                  <td>{cur.email}</td>
-                  <td>{cur.status}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => viewDetail(cur._id)}
-                    >
-                      View Data
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "auto auto auto",
+            rowGap: "20px",
+          }}
+        >
+          {datalist.map((c, ind) => {
+            return (
+              <Card key={ind} style={{ width: "20rem" }}>
+                <Card.Img variant="top" src="./pro.jpg" />
+                <Card.Body>
+                  <Card.Title>Name : {c.name}</Card.Title>
+                  <Card.Text className="mt-3">Email : {c.email}</Card.Text>
+                  <Card.Text>Status : {c.status}</Card.Text>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => viewDetail(c._id)}
+                  >
+                    View Details
+                  </button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </div>
+
         {loading && (
           <>
             <BallTriangle />

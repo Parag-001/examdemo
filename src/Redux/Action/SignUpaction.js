@@ -50,10 +50,11 @@ export const errorHandle = (name, val) => {
         }
     }
 }
-export const clickVali = (val) => {
+export const clickVali = (val,q) => {
     return {
         type: "CLICK",
-        payload: val
+        payload: val,
+        ind: q
     }
 }
 export const resetForm = () => {
@@ -70,6 +71,12 @@ export const prevValue = (val) => {
 export const nextValue = (val) => {
     return {
         type: "NEXT_QUESTION_DATA",
+        payload: val
+    }
+}
+export const first_Value = (val) => {
+    return {
+        type: "FIRST_EDIT_VALUE",
         payload: val
     }
 }

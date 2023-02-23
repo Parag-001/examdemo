@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import {
+  handle_Edit_Exam,
   handle_Exam,
   nextQuestion,
   previousQuestion,
@@ -13,11 +15,11 @@ import {
   resetForm,
 } from "../Redux/Action/SignUpaction";
 import ClickValidation from "../Validation/ClickVali";
+import FormInputEdit from "./FormInputEdit";
 
-import FormInput from "./FormInput";
-
-const CreateExam = () => {
+const EditExamData = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     question,
     answer,
@@ -28,11 +30,13 @@ const CreateExam = () => {
     subName,
     note,
   } = useSelector((stat) => stat.SignUp.val);
-  const { eror, val, questionError } = useSelector((stat) => stat.SignUp);
-  const { questionno, pre_val, questionData } = useSelector(
+  const { eror, val } = useSelector((stat) => stat.SignUp);
+  const { questionno, singleExamData, singleData, questionData } = useSelector(
     (stat) => stat.ExamData
   );
-  const err = Object.values(questionError).every((a) => a !== "");
+  const err = Object.values(eror)
+    .filter((c) => c !== undefined)
+    .some((a) => a !== "");
   const valcheck = Object.values(val).every((c) => c === "");
   const va = Object.values(val).every((c) => c === "");
   const handleNext = (e) => {
@@ -54,21 +58,30 @@ const CreateExam = () => {
         )
       );
     !va && dispatch(resetForm());
-    !va && dispatch(nextValue(pre_val[questionno + 1]));
+    !va && dispatch(nextValue(singleData[questionno + 1]));
   };
 
   const handlePrivious = (e) => {
     e.preventDefault();
+    dispatch(previousQuestion());
     let a = questionData[questionno - 1];
-    dispatch(previousQuestion(questionData.indexOf(a)));
-    dispatch(prevValue(pre_val[questionno - 1]));
+    dispatch(prevValue(singleData[questionno - 1]));
     questionData.splice(questionData.indexOf(a), 1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      handle_Exam(question, option1, option2, option3, option4, answer, note)
+      handle_Edit_Exam(
+        question,
+        option1,
+        option2,
+        option3,
+        option4,
+        answer,
+        note,
+        navigate
+      )
     );
     dispatch(resetForm());
   };
@@ -101,7 +114,7 @@ const CreateExam = () => {
             )
           );
           dispatch(resetForm());
-          dispatch(nextValue(pre_val[questionno + 1]));
+          dispatch(nextValue(singleData[questionno + 1]));
         } else if (result.isDenied) {
           swal.fire("Changes are not saved", "", "info");
         }
@@ -110,7 +123,7 @@ const CreateExam = () => {
   return (
     <>
       <form action="" onSubmit={handleNext}>
-        <FormInput
+        <FormInputEdit
           Label={`Q- ${questionno + 1}`}
           element="input"
           require={true}
@@ -119,21 +132,23 @@ const CreateExam = () => {
           name="question"
           nameclass="exam-input"
         />
-        <FormInput
+        <FormInputEdit
           element="radio"
           type="text"
+          // disabled={true}
           place="Option - 1 "
           name="option1"
           nameclass="exam-input-option"
         />
-        <FormInput
+        <FormInputEdit
           element="radio"
           type="text"
+          // disabled={true}
           place="Option - 2 "
           name="option2"
           nameclass="exam-input-option"
         />
-        <FormInput
+        <FormInputEdit
           element="radio"
           type="text"
           // disabled={true}
@@ -141,14 +156,15 @@ const CreateExam = () => {
           name="option3"
           nameclass="exam-input-option"
         />
-        <FormInput
+        <FormInputEdit
           element="radio"
           type="text"
+          // disabled={true}
           place="Option - 4 "
           name="option4"
           nameclass="exam-input-option"
         />
-        <FormInput
+        <FormInputEdit
           element="input"
           type="text"
           disabled={true}
@@ -157,14 +173,14 @@ const CreateExam = () => {
           name="answer"
           nameclass="exam-input-option"
         />
-        <FormInput
+        <FormInputEdit
           element="input"
           type="text"
           place="Give Note"
           name="note"
           nameclass="exam-input-option"
         />
-        <FormInput
+        <FormInputEdit
           element="button"
           type="button"
           nameclass={`btn btn-primary mx-2 ${
@@ -201,4 +217,4 @@ const CreateExam = () => {
   );
 };
 
-export default CreateExam;
+export default EditExamData;

@@ -1,4 +1,5 @@
-import swal from "sweetalert"
+import { Flip, toast } from "react-toastify"
+import swal from "sweetalert2"
 import { resetForm } from "./SignUpaction"
 
 export const handleLogin = (navigate) => {
@@ -17,13 +18,19 @@ export const handleLogin = (navigate) => {
          const res = await data.json()
          if (res.statusCode === 500) {
              swal("Sorry",res.message,"error")
+            //  toast.error(res.message)
          } else {
             dispatch(resetForm())
              res.data.role === "teacher" ? navigate("/teacherdashboard"): navigate("/student")
              localStorage.setItem("token", JSON.stringify(res.data.token));
              localStorage.setItem("Login", JSON.stringify(true))
              localStorage.setItem("role", JSON.stringify(res.data.role))
-             swal("Great", res.message, "success")
+             swal.fire("Great", res.message, "success")
+            //  toast.success(res.message, {
+            //      position: "top-center",
+            //      Transition: "flip"
+            //  })
+             
          }
         dispatch({
              type: "LOGIN",

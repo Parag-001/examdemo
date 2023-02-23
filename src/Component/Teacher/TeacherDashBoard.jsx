@@ -1,4 +1,5 @@
 import React from "react";
+import { Carousel } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const TeacherDashBoard = () => {
@@ -6,7 +7,7 @@ const TeacherDashBoard = () => {
   console.log("isLogin", isLogin);
   return (
     <>
-      <h1 className="text-center">Welcome {data.name}</h1>
+      <h2 className="text-secondary text-center mt-2">Welcome {data.name}</h2>
     </>
   );
 };

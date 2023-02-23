@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   changeData,
   clickVali,
   errorHandle,
+  first_Value,
 } from "../Redux/Action/SignUpaction";
 import { useDispatch, useSelector } from "react-redux";
 import Validation from "../Validation/Validation";
 import { changeExamData } from "../Redux/Action/CreateExam";
 import ClickValidation from "../Validation/ClickVali";
 
-const FormInput = (prop) => {
+const FormInputEdit = (prop) => {
   const {
     name,
     type,
@@ -24,16 +25,23 @@ const FormInput = (prop) => {
   } = prop;
   const dispatch = useDispatch();
   const { val, eror, questionError } = useSelector((stat) => stat.SignUp);
-  const { pre_val, prev_bool, questionno, subjectName } = useSelector(
-    (stat) => stat.ExamData
-  );
-
+  const {
+    pre_val,
+    prev_bool,
+    Edit_bool,
+    questionno,
+    singleData,
+    singleExamData,
+  } = useSelector((stat) => stat.ExamData);
   const handleChange = (e) => {
     dispatch(errorHandle(name, Validation(e.target.name, e.target.value, val)));
     dispatch(changeExamData());
     dispatch(clickVali(ClickValidation(val), questionno));
     dispatch(changeData(e.target.value, e.target.name));
   };
+  useEffect(() => {
+    Edit_bool && dispatch(first_Value(singleData[0]));
+  }, []);
 
   const element =
     prop.element === "input" ? (
@@ -43,7 +51,9 @@ const FormInput = (prop) => {
           type={type}
           name={name}
           error={error}
-          value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
+          value={
+            (Edit_bool ? singleData[questionno]?.[name] : "") || val?.[name]
+          }
           onChange={handleChange}
           disabled={disabled}
           autoComplete="off"
@@ -60,14 +70,18 @@ const FormInput = (prop) => {
           type="radio"
           name="answer"
           checked={false}
-          value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
+          value={
+            (Edit_bool ? singleData[questionno]?.[name] : "") || val?.[name]
+          }
           onChange={handleChange}
         />
         <input
           type={type}
           name={name}
           error={error}
-          value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
+          value={
+            (Edit_bool ? singleData[questionno]?.[name] : "") || val?.[name]
+          }
           onChange={handleChange}
           autoComplete="off"
           disabled={inputdisabled}
@@ -89,7 +103,7 @@ const FormInput = (prop) => {
         <label htmlFor="">{Label}</label>
         <select
           name={name}
-          value={subjectName[0] === "" ? val?.[name] : subjectName[0]}
+          value={val?.[name]}
           className={nameclass}
           onChange={handleChange}
           disabled={disabled}
@@ -107,4 +121,4 @@ const FormInput = (prop) => {
   return <>{element}</>;
 };
 
-export default FormInput;
+export default FormInputEdit;

@@ -23,7 +23,6 @@ export const handle_Exam = (ques, o1, o2, o3, o4, answer,note) => {
             }
         })
         const res = await data.json()
-        console.log('res', res)
         if (res.statusCode === 200) {
             swal("Good !", res.message, "success")
             localStorage.setItem("examdata", JSON.stringify(res.data))
@@ -36,9 +35,43 @@ export const handle_Exam = (ques, o1, o2, o3, o4, answer,note) => {
         })
     }
 }
+export const handle_Edit_Exam = (ques, o1, o2, o3, o4, answer, note,navigate) => {
+    return async (dispatch, getState) => {
+        const id = localStorage.getItem("id")
+        dispatch(nextQuestion(ques, o1, o2, o3, o4, answer,note))
+        const token = localStorage.getItem("token")
+        const state = getState()
+        const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/editExam?id=${id}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                subjectName: state.ExamData.subjectName[0],
+                questions: state.ExamData.questionData,
+                notes: state.ExamData.notes.filter((c) => c !== "" && c!== undefined)
+            }),
+            headers: {
+                "access-token": JSON.parse(token),
+                 "Content-type": "application/json",
+            }
+        })
+        const res = await data.json()
+        console.log('res', res)
+        if (res.statusCode === 200) {
+            swal("Good !", res.message, "success")
+            localStorage.setItem("examdata", JSON.stringify(res.data))
+            navigate('/viewexam')
+        } else {
+            swal("Sorry !", res.message, "error")
+        }
+        dispatch({
+            type: "SUBMIT_EXAM_DATA",
+            payload: res.data
+        })
+    }
+}
 
-export const particular_Exam = (id,navigate) => {
+export const particular_Exam = (id, navigate, nav, a) => {
     const token = localStorage.getItem("token")
+    localStorage.setItem("id", id)
     return async(dispatch,getState) => {
         const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/examDetail?id=${id}`, {
             method: "GET",
@@ -47,10 +80,23 @@ export const particular_Exam = (id,navigate) => {
             }
         })
         const res = await data.json()
-        navigate('/viewexamdata')
+        if (res.statusCode === 200) {
+            navigate(nav);
+        }
+        console.log('res', res)
         dispatch({
             type: "VIEW_EXAM_DATA",
-            payload: res.data
+            payload: res.data,
+            single: res.data?.questions.map((a) => {
+                 return {
+                        question: a.question,
+                        answer: a.answer,
+                        option1: a.options[0],
+                        option2: a.options[1],
+                        option3: a.options[2],
+                        option4: a.options[3],
+                   };
+                })
         })
     }
 }
@@ -65,11 +111,6 @@ export const deleteData = (id) => {
             }
         })
         const res = await data.json()
-        if (res.statusCode === 200) {
-            swal("Deleted", res.message, "success")
-        } else {
-            swal("Sorry!", res.message, "error")     
-        }
         const a = state.ExamData.examData.filter((c) => {
             return c._id !== id
         })
@@ -106,7 +147,7 @@ export const previousQuestion = (val) => {
 }
 export const viewExamDetail = (val) => {
        return async (dispatch, getstate) => {
-         const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token")
         const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/viewExam`, {
             method: "GET",
             headers: {
@@ -116,7 +157,8 @@ export const viewExamDetail = (val) => {
         const res = await data.json()
         dispatch({
             type: "VIEW_EXAM_DETAIL",
-            payload: res.data
+            payload: res.data,
+            // single: a
         })
     }
 }

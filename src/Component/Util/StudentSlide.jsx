@@ -19,7 +19,7 @@ const StudentSlide = ({ children }) => {
         <div className="row">
           <div
             className="col-md-2"
-            style={{ height: "100vh", background: "lightgrey" }}
+            style={{ height: "100vh", background: "rgb(168, 224, 211)" }}
           >
             <ul>
               <li>
@@ -46,7 +46,7 @@ const StudentSlide = ({ children }) => {
           <div className="col-md-10">
             <nav className="navbar">
               <div style={{ marginLeft: "90%" }}>
-                <button className="btn btn-secondary" onClick={handlelogout}>
+                <button className="btn btn-success" onClick={handlelogout}>
                   Logout
                 </button>
               </div>

@@ -4,11 +4,10 @@ import { useSelector } from "react-redux";
 
 const ViewExamData = () => {
   const { singleExamData, loading } = useSelector((stat) => stat.ExamData);
-  console.log("singleExamData", singleExamData);
   return (
     <>
       <h2 className="text-center my-3">View Exam Detail </h2>
-      <div className="container">
+      <div className="container studdata">
         <table className="table table-bordered">
           <thead>
             <tr>
