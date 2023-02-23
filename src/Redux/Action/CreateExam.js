@@ -1,4 +1,5 @@
 import swal from "sweetalert"
+import { resetForm } from "./SignUpaction"
 export const changeExamData = () => {
     return {
         type: "CHANGE_EXAM",
@@ -23,9 +24,11 @@ export const handle_Exam = (ques, o1, o2, o3, o4, answer,note) => {
             }
         })
         const res = await data.json()
+        console.log('res', res)
         if (res.statusCode === 200) {
             swal("Good !", res.message, "success")
             localStorage.setItem("examdata", JSON.stringify(res.data))
+            dispatch(resetForm())
         } else {
             swal("Sorry !", res.message, "error")
         }
@@ -59,17 +62,18 @@ export const handle_Edit_Exam = (ques, o1, o2, o3, o4, answer, note,navigate) =>
             swal("Good !", res.message, "success")
             localStorage.setItem("examdata", JSON.stringify(res.data))
             navigate('/viewexam')
+            dispatch(resetForm())
         } else {
             swal("Sorry !", res.message, "error")
         }
         dispatch({
-            type: "SUBMIT_EXAM_DATA",
-            payload: res.data
+            type: "EDIT_EXAM_DATA",
+            payload: res.data.questions
         })
     }
 }
 
-export const particular_Exam = (id, navigate, nav, a) => {
+export const particular_Exam = (id, navigate, nav, sub,note) => {
     const token = localStorage.getItem("token")
     localStorage.setItem("id", id)
     return async(dispatch,getState) => {
@@ -83,18 +87,19 @@ export const particular_Exam = (id, navigate, nav, a) => {
         if (res.statusCode === 200) {
             navigate(nav);
         }
-        console.log('res', res)
         dispatch({
             type: "VIEW_EXAM_DATA",
             payload: res.data,
             single: res.data?.questions.map((a) => {
-                 return {
+                return {
+                        subName: sub,
                         question: a.question,
                         answer: a.answer,
                         option1: a.options[0],
                         option2: a.options[1],
                         option3: a.options[2],
                         option4: a.options[3],
+                        // notes: note
                    };
                 })
         })

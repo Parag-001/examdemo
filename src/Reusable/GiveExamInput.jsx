@@ -4,13 +4,15 @@ import {
   clickVali,
   errorHandle,
   first_Value,
+  first_Value_Exam,
 } from "../Redux/Action/SignUpaction";
 import { useDispatch, useSelector } from "react-redux";
 import Validation from "../Validation/Validation";
 import { changeExamData } from "../Redux/Action/CreateExam";
 import ClickValidation from "../Validation/ClickVali";
+import { changeGiveExamData } from "../Redux/Action/GiveExamStudent";
 
-const FormInputEdit = (prop) => {
+const GiveExamInput = (prop) => {
   const {
     name,
     type,
@@ -28,14 +30,15 @@ const FormInputEdit = (prop) => {
   const { Edit_bool, questionno, singleData } = useSelector(
     (stat) => stat.ExamData
   );
+  const { Exam_bool, examPaper } = useSelector((stat) => stat.Give_Exam_Paper);
   const handleChange = (e) => {
     dispatch(errorHandle(name, Validation(e.target.name, e.target.value, val)));
-    dispatch(changeExamData());
+    dispatch(changeGiveExamData());
     dispatch(clickVali(ClickValidation(val), questionno));
     dispatch(changeData(e.target.value, e.target.name));
   };
   useEffect(() => {
-    Edit_bool && dispatch(first_Value(singleData[0]));
+    Exam_bool && dispatch(first_Value_Exam(examPaper[0]));
   }, []);
   const element =
     prop.element === "input" ? (
@@ -46,7 +49,7 @@ const FormInputEdit = (prop) => {
           name={name}
           error={error}
           value={
-            (Edit_bool ? singleData[questionno]?.[name] : "") || val?.[name]
+            (Exam_bool ? examPaper[questionno]?.[name] : "") || val?.[name]
           }
           onChange={handleChange}
           disabled={disabled}
@@ -65,7 +68,7 @@ const FormInputEdit = (prop) => {
           name="answer"
           checked={false}
           value={
-            (Edit_bool ? singleData[questionno]?.[name] : "") || val?.[name]
+            (Exam_bool ? examPaper[questionno]?.[name] : "") || val?.[name]
           }
           onChange={handleChange}
         />
@@ -74,7 +77,7 @@ const FormInputEdit = (prop) => {
           name={name}
           error={error}
           value={
-            (Edit_bool ? singleData[questionno]?.[name] : "") || val?.[name]
+            (Exam_bool ? examPaper[questionno]?.[name] : "") || val?.[name]
           }
           onChange={handleChange}
           autoComplete="off"
@@ -115,4 +118,4 @@ const FormInputEdit = (prop) => {
   return <>{element}</>;
 };
 
-export default FormInputEdit;
+export default GiveExamInput;

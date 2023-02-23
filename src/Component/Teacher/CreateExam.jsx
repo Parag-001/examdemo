@@ -29,6 +29,9 @@ const CreateExam = () => {
               "Sankrit11",
               "ab-1",
               "ba-1",
+              "BA-TY",
+              "BA-FY",
+              "BA-SY",
             ]}
           />
 

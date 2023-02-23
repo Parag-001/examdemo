@@ -1,4 +1,4 @@
-import { Flip, toast } from "react-toastify"
+
 import swal from "sweetalert2"
 import { resetForm } from "./SignUpaction"
 
@@ -26,10 +26,6 @@ export const handleLogin = (navigate) => {
              localStorage.setItem("Login", JSON.stringify(true))
              localStorage.setItem("role", JSON.stringify(res.data.role))
              swal.fire("Great", res.message, "success")
-            //  toast.success(res.message, {
-            //      position: "top-center",
-            //      Transition: "flip"
-            //  })
              
          }
         dispatch({

@@ -29,13 +29,15 @@ const EditExam = () => {
               "Some",
               "ILTS",
               "PTE",
+              "ba-1",
+              "Sankrit11",
+              "Socil Science11",
+              "ab-1",
             ]}
           />
-
           {element}
         </div>
       </div>
-      {/* {element} */}
     </>
   );
 };

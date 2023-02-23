@@ -13,6 +13,8 @@ const user = {
     option3 : "",
     option4: "",
     note: "",
+    id: "",
+    studanswer: ""
 }
 const initialData = {
     val: {...user},
@@ -66,6 +68,11 @@ const SignUp = (state = initialData, action) => {
                 }
             }
         case "FIRST_EDIT_VALUE":
+            return {
+                ...state,
+                val: action.payload
+            }
+        case "FIRST_EXAM_VALUE":
             return {
                 ...state,
                 val: action.payload

@@ -32,13 +32,8 @@ const StudentSlide = ({ children }) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinks" to="/exampaper">
-                  Exam Paper
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="navlinks" to="/login">
-                  Give Exam
+                <NavLink className="navlinks" to="/studprofile">
+                  Profile
                 </NavLink>
               </li>
             </ul>

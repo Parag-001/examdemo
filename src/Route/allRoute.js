@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux'
 import EditExam from '../Component/Teacher/EditExam'
 import ViewAllExam from '../Component/Student/ViewAllExam'
 import ExamPaper from '../Component/Student/ExamPaper'
+import StudProfile from '../Component/Student/StudProfile'
 
 const AllRoute = () => {
     const data = localStorage.getItem("role")
@@ -107,6 +108,16 @@ const AllRoute = () => {
         <Protected>
           <StudentSlide>
             <ExamPaper />
+          </StudentSlide>
+        </Protected>
+      ),
+    },
+    {
+      path: "/studprofile",
+      element: (
+        <Protected>
+          <StudentSlide>
+            <StudProfile />
           </StudentSlide>
         </Protected>
       ),

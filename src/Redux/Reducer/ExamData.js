@@ -33,16 +33,20 @@ const ExamData = (state = initialData, action) => {
         case "VIEW_EXAM_DATA":
             return {
                 ...state,
-                singleExamData: [...state.singleExamData, action.payload],
+                singleExamData: [ action.payload],
                 singleData: action.single,
                 loading: false,
                 Edit_bool: true
             }
-        // case "DELETE": 
-        //     return {
-        //         ...state,
-        //         // examData: action.payload, 
-        //     }
+        case "EDIT_EXAM_DATA": 
+            return {
+                ...state,
+                singleExamData: {
+                    questions: [action.payload]
+                },
+                questionno: 0,
+                questionData: []
+            }
         case "NEXT": 
             let b = [...state.pre_val]
             state.questionno !== -1 && b.splice(state.questionno, 1, action.value);

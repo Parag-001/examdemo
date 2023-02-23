@@ -80,4 +80,10 @@ export const first_Value = (val) => {
         payload: val
     }
 }
+export const first_Value_Exam = (val) => {
+    return {
+        type: "FIRST_EXAM_VALUE",
+        payload: val
+    }
+}
 

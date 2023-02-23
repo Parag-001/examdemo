@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import {
   handle_Edit_Exam,
-  handle_Exam,
   nextQuestion,
   previousQuestion,
 } from "../Redux/Action/CreateExam";

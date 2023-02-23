@@ -21,7 +21,7 @@ const SlideBar = ({ children }) => {
         <div className="row">
           <div
             className="col-md-2"
-            style={{ height: "99vh", background: "rgb(168, 224, 211)" }}
+            style={{ height: "105vh", background: "rgb(168, 224, 211)" }}
           >
             <ul>
               <li className="mt-4">
