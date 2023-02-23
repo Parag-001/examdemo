@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 import {
-  Handle_Exam,
-  NextQuestion,
-  PreviousQuestion,
+  handle_Exam,
+  nextQuestion,
+  previousQuestion,
 } from "../Redux/Action/CreateExam";
-import { ClickVali, Previous, ResetForm } from "../Redux/Action/SignUpaction";
-import ClickValidation from "../users/ClickVali";
+import { nextValue, prevValue, resetForm } from "../Redux/Action/SignUpaction";
 
 import FormInput from "./FormInput";
 
@@ -30,11 +30,10 @@ const CreateExam = () => {
     .filter((c) => c !== undefined)
     .some((a) => a !== "");
   const valcheck = Object.values(val).every((c) => c === "");
-
   const handleNext = (e) => {
     e.preventDefault();
     dispatch(
-      NextQuestion(
+      nextQuestion(
         question,
         option1,
         option2,
@@ -47,31 +46,65 @@ const CreateExam = () => {
         valcheck
       )
     );
-    dispatch(ResetForm());
-    // dispatch(ClickVali(ClickValidation(val)));
+    // dispatch(clickVali(ClickValidation(val)));
+    dispatch(resetForm());
+    dispatch(nextValue(pre_val[questionno + 1]));
   };
   const handlePrivious = (e) => {
     e.preventDefault();
-    let a = questionData[questionno - 2];
+    let a = questionData[questionno - 1];
+    dispatch(previousQuestion(questionData.indexOf(a)));
+    dispatch(prevValue(pre_val[questionno - 1]));
     questionData.splice(questionData.indexOf(a), 1);
-    dispatch(PreviousQuestion());
-    dispatch(Previous(pre_val[questionno - 2]));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      Handle_Exam(question, option1, option2, option3, option4, answer, note)
+      handle_Exam(question, option1, option2, option3, option4, answer, note)
     );
-    dispatch(ResetForm());
+    dispatch(resetForm());
   };
-  const handleSkip = () => {};
+  const handleChange = (e) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once Edit, you will not be able to recover this Data!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your Data has been Edited!", {
+          icon: "success",
+        });
+        dispatch(
+          nextQuestion(
+            question,
+            option1,
+            option2,
+            option3,
+            option4,
+            answer,
+            subName,
+            note,
+            val,
+            valcheck
+          )
+        );
+        // dispatch(clickVali(ClickValidation(val)));
+        dispatch(resetForm());
+        dispatch(nextValue(pre_val[questionno + 1]));
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
+  };
   return (
     <>
       <form action="" onSubmit={handleNext}>
         <FormInput
-          Label={`Q- ${questionno}`}
+          Label={`Q- ${questionno + 1}`}
           element="input"
-          // require={true}
+          require={true}
           type="text"
           place="Question "
           name="question"
@@ -80,7 +113,7 @@ const CreateExam = () => {
         <FormInput
           element="radio"
           type="text"
-          disabled={true}
+          // disabled={true}
           place="Option - 1 "
           name="option1"
           nameclass="exam-input-option"
@@ -88,7 +121,7 @@ const CreateExam = () => {
         <FormInput
           element="radio"
           type="text"
-          disabled={true}
+          // disabled={true}
           place="Option - 2 "
           name="option2"
           nameclass="exam-input-option"
@@ -96,7 +129,7 @@ const CreateExam = () => {
         <FormInput
           element="radio"
           type="text"
-          disabled={true}
+          // disabled={true}
           place="Option - 3 "
           name="option3"
           nameclass="exam-input-option"
@@ -104,7 +137,7 @@ const CreateExam = () => {
         <FormInput
           element="radio"
           type="text"
-          disabled={true}
+          // disabled={true}
           place="Option - 4 "
           name="option4"
           nameclass="exam-input-option"
@@ -112,44 +145,36 @@ const CreateExam = () => {
         <FormInput
           element="input"
           type="text"
-          // require={true}
+          disabled={true}
+          require={true}
           place="Give Correct Answer"
           name="answer"
           nameclass="exam-input-option"
         />
-        {/* <FormInput
+        <FormInput
           element="input"
           type="text"
           place="Give Note"
           name="note"
           nameclass="exam-input-option"
-        /> */}
-        {/* <div className="botton">
-          <input
-            type="button"
-            className={`btn btn-primary mx-2 ${
-              questionno === 1 ? "disabled" : null
-            }`}
-            value="Previous"
-            onClick={handlePrivious}
-          /> */}
+        />
         <FormInput
           element="button"
           type="button"
           nameclass={`btn btn-primary mx-2 ${
-            questionno === 1 ? "disabled" : null
+            questionno === 0 ? "disabled" : null
           }`}
           valname="Previous"
           click={handlePrivious}
         />
-        {/* <input
-            type="button"
-            className={`btn btn-primary mx-2 ${
-              questionno === 1 ? "disabled" : null
-            }`}
-            value="Skip"
-            onClick={handleSkip}
-          /> */}
+        <input
+          type="button"
+          className={`btn btn-primary mx-2 ${
+            Object.values(val).every((c) => c === "") ? "disabled" : null
+          }`}
+          value="Changes"
+          onClick={handleChange}
+        />
         <input
           type="submit"
           className={`btn btn-primary  mx-2 ${
@@ -160,12 +185,11 @@ const CreateExam = () => {
         <input
           type="button"
           className={`btn btn-primary mx-2 ${
-            questionData.length < 14 ? "" : null
+            questionData.length < 14 ? "disabled" : null
           }`}
           value="Submit"
           onClick={handleSubmit}
         />
-        {/* </div> */}
       </form>
     </>
   );

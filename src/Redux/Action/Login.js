@@ -1,5 +1,5 @@
 import swal from "sweetalert"
-import { ResetForm } from "./SignUpaction"
+import { resetForm } from "./SignUpaction"
 
 export const handleLogin = (navigate) => {
      return async (dispatch, getState) => {
@@ -18,7 +18,7 @@ export const handleLogin = (navigate) => {
          if (res.statusCode === 500) {
              swal("Sorry",res.message,"error")
          } else {
-            dispatch(ResetForm())
+            dispatch(resetForm())
              res.data.role === "teacher" ? navigate("/teacherdashboard"): navigate("/student")
              localStorage.setItem("token", JSON.stringify(res.data.token));
              localStorage.setItem("Login", JSON.stringify(true))
@@ -32,7 +32,7 @@ export const handleLogin = (navigate) => {
     }   
 }
 
-export const Logout = () => {
+export const logout = () => {
     localStorage.setItem("Login",JSON.stringify(false) )
     return {
         type: "LOGOUT",

@@ -5,10 +5,7 @@ const ClickValidation = (val) => {
   //     }
   //   });
   //   console.log("val.name :>> ", val.name);
-  //   return Object.values(val).every((c) => (c === "" ? "Please Enter Data" : ""));
-  return Object.entries(val).map(([key]) =>
-    val[key] === "" ? "Please Enter Data" : ""
-  );
+  return Object.values(val).map((c) => (c === "" ? "Please Enter Data" : ""));
 };
 
 export default ClickValidation;

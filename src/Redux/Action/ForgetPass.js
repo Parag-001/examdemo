@@ -1,5 +1,5 @@
 import swal from "sweetalert"
-import { ResetForm } from "./SignUpaction"
+import { resetForm } from "./SignUpaction"
 
 export const handlePass = () => {
      return async (dispatch, getState) => {
@@ -17,7 +17,7 @@ export const handlePass = () => {
          console.log('res', res)
          if (res.statusCode === 200) {
              swal("Check Mail", res.message, "success")
-             dispatch(ResetForm())
+             dispatch(resetForm())
          } else {
              swal("Sorry",res.message,"error")
          }

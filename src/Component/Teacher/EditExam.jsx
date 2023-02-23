@@ -4,13 +4,15 @@ import CreateExam1 from "../../Reusable/CreateExam";
 
 import FormInput from "../../Reusable/FormInput";
 
-const CreateExam = () => {
-  const { questionno } = useSelector((stat) => stat.ExamData);
+const EditExam = () => {
+  const { questions, questionno, examData } = useSelector(
+    (stat) => stat.ExamData
+  );
   const comp = <CreateExam1 />;
   const element = comp;
   return (
     <>
-      <h1 className="text-center mt-3 text-success">Create Exam</h1>
+      <h1 className="text-center mt-3 text-success">Edit Exam</h1>
       <div className="container">
         <div className="exam">
           <FormInput
@@ -40,4 +42,4 @@ const CreateExam = () => {
   );
 };
 
-export default CreateExam;
+export default EditExam;

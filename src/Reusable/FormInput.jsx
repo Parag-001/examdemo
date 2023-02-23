@@ -1,12 +1,13 @@
 import React from "react";
 import {
-  ChangeData,
+  changeData,
+  clickVali,
   errorHandle,
-  Previous,
 } from "../Redux/Action/SignUpaction";
 import { useDispatch, useSelector } from "react-redux";
 import Validation from "../users/Validation";
-import { ChangeExamData } from "../Redux/Action/CreateExam";
+import { changeExamData } from "../Redux/Action/CreateExam";
+import ClickValidation from "../users/ClickVali";
 
 const FormInput = (prop) => {
   const {
@@ -25,28 +26,27 @@ const FormInput = (prop) => {
 
   const dispatch = useDispatch();
   const { val, eror } = useSelector((stat) => stat.SignUp);
-  const { pre_val, prev_bool, questionno, questionData } = useSelector(
+  const { pre_val, prev_bool, questionno } = useSelector(
     (stat) => stat.ExamData
   );
 
   const handleChange = (e) => {
     dispatch(errorHandle(name, Validation(e.target.name, e.target.value, val)));
-    dispatch(ChangeExamData());
-    // dispatch(Previous(e.target.name, pre_val[questionno - 1]?.[name]));
-    dispatch(ChangeData(e.target.value, name));
+    dispatch(changeExamData());
+    dispatch(clickVali(ClickValidation(val)));
+    dispatch(changeData(e.target.value, e.target.name));
   };
+
   const element =
     prop.element === "input" ? (
       <div className="form-group mb-3">
         <label htmlFor="">{Label}</label>
         <input
           type={type}
-          // required={require}
+          required={require}
           name={name}
           error={error}
-          value={
-            (prev_bool ? pre_val[questionno - 1]?.[name] : "") || val?.[name]
-          }
+          value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
           onChange={handleChange}
           disabled={disabled}
           autoComplete="off"
@@ -60,17 +60,17 @@ const FormInput = (prop) => {
         <input
           className="form-check-input"
           type="radio"
-          disabled={disabled}
-          name="flexRadioDefault"
+          name="answer"
+          checked={false}
+          value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
+          onChange={handleChange}
         />
         <input
           type={type}
-          // required
+          required
           name={name}
           error={error}
-          value={
-            (prev_bool ? pre_val[questionno - 1]?.[name] : "") || val?.[name]
-          }
+          value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
           onChange={handleChange}
           autoComplete="off"
           disabled={inputdisabled}

@@ -4,16 +4,17 @@ import CreateExam1 from "../../Reusable/CreateExam";
 
 import FormInput from "../../Reusable/FormInput";
 
-const CreateExam = () => {
-  const { questionno } = useSelector((stat) => stat.ExamData);
+const ExamPaper = () => {
+  const { questions, questionno, examData } = useSelector(
+    (stat) => stat.ExamData
+  );
   const comp = <CreateExam1 />;
   const element = comp;
   return (
     <>
-      <h1 className="text-center mt-3 text-success">Create Exam</h1>
       <div className="container">
         <div className="exam">
-          <FormInput
+          {/* <FormInput
             name="subName"
             element="select"
             nameclass={`btn btn-primary mx-2 ${
@@ -30,7 +31,7 @@ const CreateExam = () => {
               "ab-1",
               "ba-1",
             ]}
-          />
+          /> */}
 
           {element}
         </div>
@@ -40,4 +41,4 @@ const CreateExam = () => {
   );
 };
 
-export default CreateExam;
+export default ExamPaper;

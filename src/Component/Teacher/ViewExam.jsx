@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { DeleteData, Particular_Exam } from "../../Redux/Action/CreateExam";
+import {
+  deleteData,
+  particular_Exam,
+  viewExamDetail,
+} from "../../Redux/Action/CreateExam";
 import { FaTrashAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
+import { BallTriangle } from "react-loader-spinner";
 
 const ViewExam = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { examData } = useSelector((stat) => stat.ExamData);
-  console.log("examData", examData);
+  const { allExamData, loading } = useSelector((stat) => stat.ExamData);
   const handleData = (id) => {
-    dispatch(Particular_Exam(id, navigate));
+    dispatch(particular_Exam(id, navigate));
   };
   const handleDelete = (id) => {
-    dispatch(DeleteData(id));
+    dispatch(deleteData(id));
+  };
+  useEffect(() => {
+    dispatch(viewExamDetail());
+  }, [deleteData()]);
+  const handleEdit = () => {
+    navigate("/editexam");
   };
   return (
     <>
@@ -31,7 +41,7 @@ const ViewExam = () => {
             </tr>
           </thead>
           <tbody>
-            {examData.map((c, ind) => {
+            {allExamData.map((c, ind) => {
               return (
                 <tr key={ind}>
                   <td>{c.email}</td>
@@ -49,6 +59,7 @@ const ViewExam = () => {
                     <FiEdit
                       className="fs-4 mx-2"
                       style={{ cursor: "pointer" }}
+                      onClick={() => handleEdit()}
                     />
                     <FaTrashAlt
                       className="fs-4 mx-3"
@@ -61,6 +72,11 @@ const ViewExam = () => {
             })}
           </tbody>
         </table>
+        {loading && (
+          <>
+            <BallTriangle /> <h1>Loading...</h1>
+          </>
+        )}
       </div>
     </>
   );

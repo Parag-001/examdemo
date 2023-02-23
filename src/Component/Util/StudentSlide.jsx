@@ -2,14 +2,14 @@ import React from "react";
 import { GiTeacher } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Logout } from "../../Redux/Action/Login";
+import { logout } from "../../Redux/Action/Login";
 
 const StudentSlide = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handlelogout = () => {
-    dispatch(Logout());
+    dispatch(logout());
     navigate("/login");
     localStorage.removeItem("token");
   };
@@ -27,12 +27,12 @@ const StudentSlide = ({ children }) => {
                 Student
               </li>
               <li>
-                <NavLink className="navlinks" to="/studentData">
+                <NavLink className="navlinks" to="/viewallexam">
                   AllExam
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinks" to="/createexam">
+                <NavLink className="navlinks" to="/exampaper">
                   Exam Paper
                 </NavLink>
               </li>
@@ -51,7 +51,7 @@ const StudentSlide = ({ children }) => {
                 </button>
               </div>
             </nav>
-            {children}
+            <div className="comp">{children}</div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 
 const initialData = {
     subjectName: "",
-    questionno: 1,
+    questionno: 0,
     questionData: [],
     notes: [],
     examData: [],
@@ -10,16 +10,16 @@ const initialData = {
     loading: true,
     pre_val: [],
     prev_bool: false,
+    allExamData: []
 }
 const ExamData = (state = initialData, action) => {
     switch (action.type) {
         case "CHANGE_EXAM":
             return {
                 ...state,
-                prev_bool: false
+                prev_bool:  false
             }
         case "SUBMIT_EXAM_DATA":
-            console.log('action.payload', action.payload)
             return {
                 ...state,
                 examData: [...state.examData, action.payload],
@@ -33,20 +33,22 @@ const ExamData = (state = initialData, action) => {
                 singleExamData: [...state.singleExamData, action.payload],
                 loading: false
             }
-        case "DELETE": 
-            return {
-                ...state,
-                examData: action.payload
-            }
+        // case "DELETE": 
+        //     return {
+        //         ...state,
+        //         // examData: action.payload, 
+        //     }
         case "NEXT": 
-            return { 
-                ...state, 
-                subjectName: [...state.subjectName,action.subjectName],
-                questionData: [...state.questionData, action.payload],
-                questionno: state.questionno === 15 ? state.questionno : state.questionno + 1,
-                notes: [...state.notes, action.notes],
-                pre_val: [...state.pre_val, action.value],
-                prev_bool: false
+            let b = [...state.pre_val]
+            state.questionno !== -1 && b.splice(state.questionno, 1, action.value);
+        return { 
+            ...state, 
+                 subjectName: [...state.subjectName,action.subjectName],
+                 questionData:  [...state.questionData, action.payload] ,
+                 questionno: state.questionno === 15 ? state.questionno : state.questionno + 1,
+                 notes: [...state.notes, action.notes],
+                 pre_val: state.questionno === 0 && state.pre_val.length === 0 ? [...state.pre_val, action.value] : b,
+                 prev_bool: true
             } 
         case "PREVIOUS": 
             return { 
@@ -54,6 +56,12 @@ const ExamData = (state = initialData, action) => {
                 questionno: state.questionno - 1,
                 prev_bool: true,
             } 
+        case "VIEW_EXAM_DETAIL":
+            return {
+                ...state,
+                allExamData: action.payload,
+                loading: false
+            }
         default: return state 
     } 
  

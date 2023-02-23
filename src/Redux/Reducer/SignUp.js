@@ -21,6 +21,13 @@ const initialData = {
     userslist: [],
     eror: {...user},
     er: {},
+    // questionError: {
+    // question: "",
+    // option1 : "",
+    // option2 : "",
+    // option3 : "",
+    // option4: "",
+    // }
 }
 
 const SignUp = (state = initialData, action) => {
@@ -38,6 +45,11 @@ const SignUp = (state = initialData, action) => {
             return {
                 ...state,
                 val: action.payload
+            }
+        case "NEXT_QUESTION_DATA":
+            return {
+                ...state,
+                val: action.payload === undefined ? {...user} : action.payload
             }
         case "SUBMIT":
             return {
@@ -61,9 +73,6 @@ const SignUp = (state = initialData, action) => {
         case "CLICK":
             return {
                 ...state,
-                eror: {
-                    name: action.payload[0],  email: action.payload[1], password: action.payload[2], role: action.payload[3],  confirmpass: action.payload[5],   question: action.payload[6],  answer: action.payload[7],   option1 : action.payload[8], option2 : action.payload[9], option3 : action.payload[10], option4 : action.payload[11],note: action.payload[12],
-                }
             }
         default: return state
     }

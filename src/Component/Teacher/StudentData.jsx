@@ -1,9 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
-import Main from "../../Route/Main";
 import {
-  StudentDataShow,
-  Particular_Data,
+  studentDataShow,
+  particular_Data,
 } from "../../Redux/Action/StudentData";
 import { useDispatch, useSelector } from "react-redux";
 import { BallTriangle } from "react-loader-spinner";
@@ -13,10 +12,10 @@ const StudentData = () => {
   const dispatch = useDispatch();
   const { datalist, loading } = useSelector((stat) => stat.StudentDataShow);
   useEffect(() => {
-    dispatch(StudentDataShow());
+    dispatch(studentDataShow());
   }, []);
   const viewDetail = (i) => {
-    dispatch(Particular_Data(i, navigate));
+    dispatch(particular_Data(i, navigate));
   };
   return (
     <>

@@ -15,6 +15,9 @@ import StudentSlide from '../Component/Util/StudentSlide'
 import ViewExam from '../Component/Teacher/ViewExam'
 import ViewExamData from '../Component/Teacher/ViewExamData'
 import { useSelector } from 'react-redux'
+import EditExam from '../Component/Teacher/EditExam'
+import ViewAllExam from '../Component/Student/ViewAllExam'
+import ExamPaper from '../Component/Student/ExamPaper'
 
 const AllRoute = () => {
     const data = localStorage.getItem("role")
@@ -60,6 +63,10 @@ const AllRoute = () => {
                 element: <Protected> <SlideBar ><ViewExamData /></SlideBar></Protected> ,
             },
             {
+                path: "/editexam",
+                element: <Protected> <SlideBar ><EditExam /></SlideBar></Protected> ,
+            },
+            {
                 path: "*",
                 element: <SlideBar> <h1 className='text-center'> Page Not Found </h1></SlideBar>,
             },
@@ -85,6 +92,26 @@ const AllRoute = () => {
       ),
     },
     {
+      path: "/viewallexam",
+      element: (
+        <Protected>
+          <StudentSlide>
+            <ViewAllExam />
+          </StudentSlide>
+        </Protected>
+      ),
+    },
+    {
+      path: "/exampaper",
+      element: (
+        <Protected>
+          <StudentSlide>
+            <ExamPaper />
+          </StudentSlide>
+        </Protected>
+      ),
+    },
+    {
       path: "/ForgetPassword",
       element: (
         <>
@@ -101,7 +128,7 @@ const AllRoute = () => {
       path: "*",
       element: (
         <StudentSlide>
-          <h1 className="text-center"> Page Not Found </h1>{" "}
+          <h1 className="text-center"> Page Not Found </h1>
         </StudentSlide>
       ),
     },

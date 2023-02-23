@@ -1,7 +1,7 @@
 import swal from "sweetalert"
-import { ResetForm } from "./SignUpaction"
+import { resetForm } from "./SignUpaction"
 
-export const NewPassword = (token) => {
+export const newPassword = (token) => {
          return async (dispatch, getState) => {
         const state = getState()
         const data = await fetch(`https://examination.onrender.com/users/ForgotPassword/Verify?token=${token}`, {
@@ -17,7 +17,7 @@ export const NewPassword = (token) => {
              const res = await data.json()
              if (res.statusCode === 200) {
                  swal("Super",res.message, "success")
-            dispatch(ResetForm())
+            dispatch(resetForm())
              } else {
                      swal("Sorry",res.message, "error")
         }

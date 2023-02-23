@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Main from "../../Route/Main";
+
 const ViewData = () => {
   const { viewData } = useSelector((stat) => stat.StudentDataShow);
   return (

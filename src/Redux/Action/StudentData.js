@@ -1,4 +1,4 @@
-export const StudentDataShow = () => {
+export const studentDataShow = () => {
     const token = localStorage.getItem("token")
     return async (dispatch, getState) => {
         const data = await fetch('https://examination.onrender.com/dashboard/Teachers', {
@@ -15,7 +15,7 @@ export const StudentDataShow = () => {
     }
 }
 
-export const Particular_Data = (id,navigate) => {
+export const particular_Data = (id,navigate) => {
     const token = localStorage.getItem("token")
     return async(dispatch,getState) => {
         const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/viewStudentDetail?id=${id}`, {

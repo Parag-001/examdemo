@@ -1,5 +1,5 @@
 import swal from 'sweetalert'
-export const ChangeData = (val, name,prev_bool) => {
+export const changeData = (val, name,prev_bool) => {
     return {
         type: "CHANGE",
         payload: {
@@ -31,7 +31,7 @@ export const handleSubmit = (nav) => {
         if (res.statusCode === 200) {
             swal("Ohh yes", res.message,"success")
             nav("/login")
-            dispatch(ResetForm())
+            dispatch(resetForm())
         } else {
             swal("Error", res.message, "error")
         }
@@ -50,20 +50,26 @@ export const errorHandle = (name, val) => {
         }
     }
 }
-export const ClickVali = (val) => {
+export const clickVali = (val) => {
     return {
         type: "CLICK",
         payload: val
     }
 }
-export const ResetForm = () => {
+export const resetForm = () => {
     return {
         type: "RESET",
     }
 }
-export const Previous = (val) => {
+export const prevValue = (val) => {
     return {
         type: "PREV",
+        payload: val
+    }
+}
+export const nextValue = (val) => {
+    return {
+        type: "NEXT_QUESTION_DATA",
         payload: val
     }
 }

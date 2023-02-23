@@ -11,24 +11,6 @@ const ForgetPassword = () => {
   };
   return (
     <>
-      {/* <div className="w-25 main-div-signup bg-light px-4 py-2 container">
-        <h3 className="text-center mb-4">Forget Password</h3>
-        <form action="" onSubmit={handleSubmitPassword}>
-          <FormInput
-            Label="Email : "
-            type="email"
-            element="input"
-            place="Enter Your email Here "
-            name="email"
-            nameclass="form-control"
-          />
-          <div className="form-group text-center my-4">
-            <button className="btn btn-info" type="submit">
-              Send Mail
-            </button>
-          </div>
-        </form>
-      </div> */}
       <section className="vh-100">
         <div className="container-fluid h-custom">
           <div
