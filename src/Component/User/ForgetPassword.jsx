@@ -11,7 +11,7 @@ const ForgetPassword = () => {
   };
   return (
     <>
-      <section className="vh-100">
+      <section className="h-100">
         <div className="container-fluid h-custom">
           <div
             className="row d-flex justify-content-center align-items-center h-100"

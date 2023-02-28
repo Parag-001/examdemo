@@ -5,12 +5,11 @@ export const changeExamData = () => {
         type: "CHANGE_EXAM",
     }
 }
-export const handle_Exam = (ques, o1, o2, o3, o4, answer,note) => {
+export const handle_Exam = (ques, o1, o2, o3, o4, answer,note,navigate) => {
     return async (dispatch, getState) => {
         dispatch(nextQuestion(ques, o1, o2, o3, o4, answer,note))
         const token = localStorage.getItem("token")
         const state = getState()
-        console.log('first', state.ExamData.notes.filter((c) => c !== "" && c!== undefined))
         const data = await fetch('https://examination.onrender.com/dashboard/Teachers/Exam', {
             method: "POST",
             body: JSON.stringify({
@@ -24,10 +23,9 @@ export const handle_Exam = (ques, o1, o2, o3, o4, answer,note) => {
             }
         })
         const res = await data.json()
-        console.log('res', res)
         if (res.statusCode === 200) {
             swal("Good !", res.message, "success")
-            localStorage.setItem("examdata", JSON.stringify(res.data))
+            navigate('/viewexam')
             dispatch(resetForm())
         } else {
             swal("Sorry !", res.message, "error")

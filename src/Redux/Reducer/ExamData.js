@@ -56,7 +56,7 @@ const ExamData = (state = initialData, action) => {
             ...state, 
                  subjectName: [...state.subjectName,action.subjectName],
                  questionData:  [...state.questionData, action.payload] ,
-                 questionno: state.questionno === 15 ? state.questionno : state.questionno + 1,
+                 questionno: state.questionno === 14 ? state.questionno : state.questionno + 1,
                  notes: [...state.notes, action.notes],
                  pre_val: state.questionno === 0 && state.pre_val.length === 0 ? [...state.pre_val, action.value] : b,
                  singleData: c,

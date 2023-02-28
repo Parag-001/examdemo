@@ -1,4 +1,5 @@
 import Swal from "sweetalert2"
+import axios from "axios";
 
 export const give_Exam = (id,navigate) => {
     const token = localStorage.getItem("token")
@@ -38,28 +39,23 @@ export const  student_Data = (id,answer) => {
         }
     }
 }
-export const submitExam = (id1,answer) => {
+export const submitExam = (id1,answer,navigate) => {
     return async (dispatch, getState) => {
         dispatch(student_Data(id1,answer))
         const id = localStorage.getItem("id")
         const state = getState()
-        console.log('id', id)
-        console.log('state.Give_Exam_Paper.studData', state.Give_Exam_Paper.studData)
         const token = localStorage.getItem("token")
-        const data = await fetch(`https://examination.onrender.com/student/giveExam?id=${id}`, {
-            method: "POST",
-            headers: {
-                "access-token": JSON.parse(token),
-            },
-            body: state.Give_Exam_Paper.studData,
+         await axios.post(`https://examination.onrender.com/student/giveExam?id=${id}`,state.Give_Exam_Paper.studData,{
+                 headers: {
+                     "access-token": JSON.parse(token),
+                 }
+         }).then((res) => {
+             console.log('res', res)
+            navigate('/viewallexam')
+            Swal.fire("Good","Exam Finish","success")
+        }).catch((err) => {
+              Swal.fire("Oops",err.message,"error")
         })
-        const res = await data.json()
-        console.log('res', res)
-        if (res.statusCode === 200) {
-                Swal.fire("Good",res.message,"success")
-        } else {
-            Swal.fire("Oops",res.message,"error")
-            }
         dispatch({
             type: "SUBMIT_EXAM_DATA",
             // payload: res.data.questions

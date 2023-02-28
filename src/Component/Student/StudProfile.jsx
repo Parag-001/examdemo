@@ -12,6 +12,7 @@ const StudProfile = () => {
   useEffect(() => {
     dispatch(stud_Profile());
   }, []);
+
   const handleEdit = (e) => {
     e.preventDefault();
     dispatch(stud_Profile());
@@ -68,13 +69,13 @@ const StudProfile = () => {
                 name="name"
                 nameclass="form-control"
               />
-              <EditProfile
+              {/* <EditProfile
                 element="input"
                 Label="Email : "
                 type="text"
                 name="email"
                 nameclass="form-control"
-              />
+              /> */}
             </div>
             <div class="modal-footer">
               <button

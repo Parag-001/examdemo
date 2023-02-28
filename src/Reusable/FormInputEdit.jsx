@@ -35,7 +35,7 @@ const FormInputEdit = (prop) => {
     dispatch(changeData(e.target.value, e.target.name));
   };
   useEffect(() => {
-    Edit_bool && dispatch(first_Value(singleData[0]));
+    Edit_bool && questionno === 0 && dispatch(first_Value(singleData[0]));
   }, []);
   const element =
     prop.element === "input" ? (

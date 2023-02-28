@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import {
   handle_Exam,
@@ -24,6 +25,7 @@ import GiveExamInput from "./GiveExamInput";
 
 const GiveExamStud = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id, answer, subName, note } = useSelector((stat) => stat.SignUp.val);
   const { eror, val, questionError } = useSelector((stat) => stat.SignUp);
   const { questionno, pre_val, questionData } = useSelector(
@@ -53,7 +55,7 @@ const GiveExamStud = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(submitExam(id, answer));
+    dispatch(submitExam(id, answer, navigate));
     dispatch(resetForm());
   };
 

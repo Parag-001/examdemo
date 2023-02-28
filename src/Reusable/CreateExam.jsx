@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import {
   handle_Exam,
@@ -17,6 +18,7 @@ import ClickValidation from "../Validation/ClickVali";
 import FormInput from "./FormInput";
 
 const CreateExam = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     question,
@@ -37,7 +39,7 @@ const CreateExam = () => {
   const va = Object.values(val).every((c) => c === "");
   const handleNext = (e) => {
     e.preventDefault();
-    va && dispatch(clickVali(ClickValidation(val), questionno));
+    // va && dispatch(clickVali(ClickValidation(val), questionno));
     !va &&
       dispatch(
         nextQuestion(
@@ -68,7 +70,16 @@ const CreateExam = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      handle_Exam(question, option1, option2, option3, option4, answer, note)
+      handle_Exam(
+        question,
+        option1,
+        option2,
+        option3,
+        option4,
+        answer,
+        note,
+        navigate
+      )
     );
     dispatch(resetForm());
   };

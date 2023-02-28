@@ -21,6 +21,7 @@ const FormInput = (prop) => {
     inputdisabled,
     valname,
     click,
+    require,
   } = prop;
   const dispatch = useDispatch();
   const { val, eror, questionError } = useSelector((stat) => stat.SignUp);
@@ -31,7 +32,7 @@ const FormInput = (prop) => {
   const handleChange = (e) => {
     dispatch(errorHandle(name, Validation(e.target.name, e.target.value, val)));
     dispatch(changeExamData());
-    dispatch(clickVali(ClickValidation(val), questionno));
+    // dispatch(clickVali(ClickValidation(val), questionno));
     dispatch(changeData(e.target.value, e.target.name));
   };
 
@@ -42,6 +43,7 @@ const FormInput = (prop) => {
         <input
           type={type}
           name={name}
+          required={require}
           error={error}
           value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
           onChange={handleChange}
@@ -51,7 +53,7 @@ const FormInput = (prop) => {
           className={nameclass}
         />
         <p className="text-danger">{eror[name]}</p>
-        <p className="text-danger">{questionError[name]}</p>
+        {/* <p className="text-danger">{questionError[name]}</p> */}
       </div>
     ) : prop.element === "radio" ? (
       <div className="form-check">
@@ -65,6 +67,7 @@ const FormInput = (prop) => {
         />
         <input
           type={type}
+          required
           name={name}
           error={error}
           value={(prev_bool ? pre_val[questionno]?.[name] : "") || val?.[name]}
@@ -75,7 +78,7 @@ const FormInput = (prop) => {
           className={nameclass}
         />
         <p className="text-danger">{eror[name]}</p>
-        <p className="text-danger">{questionError[name]}</p>
+        {/* <p className="text-danger">{questionError[name]}</p> */}
       </div>
     ) : prop.element === "button" ? (
       <input

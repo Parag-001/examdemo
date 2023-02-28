@@ -3,12 +3,10 @@ import {
   changeData,
   clickVali,
   errorHandle,
-  first_Value,
   first_Value_Exam,
 } from "../Redux/Action/SignUpaction";
 import { useDispatch, useSelector } from "react-redux";
 import Validation from "../Validation/Validation";
-import { changeExamData } from "../Redux/Action/CreateExam";
 import ClickValidation from "../Validation/ClickVali";
 import { changeGiveExamData } from "../Redux/Action/GiveExamStudent";
 
@@ -25,21 +23,23 @@ const GiveExamInput = (prop) => {
     valname,
     click,
   } = prop;
+
   const dispatch = useDispatch();
   const { val, eror, questionError } = useSelector((stat) => stat.SignUp);
-  const { Edit_bool, questionno, singleData } = useSelector(
-    (stat) => stat.ExamData
-  );
+  const { questionno } = useSelector((stat) => stat.ExamData);
   const { Exam_bool, examPaper } = useSelector((stat) => stat.Give_Exam_Paper);
+
   const handleChange = (e) => {
     dispatch(errorHandle(name, Validation(e.target.name, e.target.value, val)));
     dispatch(changeGiveExamData());
     dispatch(clickVali(ClickValidation(val), questionno));
     dispatch(changeData(e.target.value, e.target.name));
   };
+
   useEffect(() => {
     Exam_bool && dispatch(first_Value_Exam(examPaper[0]));
   }, []);
+
   const element =
     prop.element === "input" ? (
       <div className="form-group mb-3">
@@ -88,32 +88,13 @@ const GiveExamInput = (prop) => {
         <p className="text-danger">{eror[name]}</p>
         <p className="text-danger">{questionError[name]}</p>
       </div>
-    ) : prop.element === "button" ? (
+    ) : (
       <input
         type={type}
         onClick={click}
         className={nameclass}
         value={valname}
       />
-    ) : (
-      <div className="form-group mb-3">
-        <label htmlFor="">{Label}</label>
-        <select
-          name={name}
-          value={val?.[name]}
-          className={nameclass}
-          onChange={handleChange}
-          disabled={disabled}
-        >
-          {prop.val.map((cur) => {
-            return (
-              <option key={cur} value={cur}>
-                {cur}
-              </option>
-            );
-          })}
-        </select>
-      </div>
     );
   return <>{element}</>;
 };
