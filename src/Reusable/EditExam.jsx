@@ -56,7 +56,7 @@ const EditExamData = () => {
           valcheck
         )
       );
-    !va && dispatch(resetForm());
+    dispatch(resetForm());
     !va && dispatch(nextValue(singleData[questionno + 1]));
   };
 

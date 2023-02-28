@@ -67,7 +67,7 @@ const ViewExam = () => {
           {allExamData.map((c, ind) => {
             return (
               <Card key={ind} style={{ width: "20rem" }}>
-                <Card.Img variant="top" src="./exams.webp" />
+                <Card.Img variant="top" src="./exam-paper.webp" />
                 <Card.Body>
                   <Card.Title>{c.subjectName}</Card.Title>
                   <Card.Text className="mt-3">Created By : {c.email}</Card.Text>

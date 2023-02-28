@@ -23,14 +23,14 @@ const StudProfile = () => {
   return (
     <>
       <Card style={{ width: "30rem", margin: "5% auto" }}>
-        <Card.Img variant="top" src="./pro.jpg" />
+        <Card.Img variant="top" src="./pro3.jpeg" />
         <Card.Body>
           <Card.Title>Name : {profileData.name}</Card.Title>
-          <Card.Text className="mt-3">Email : {profileData.email}</Card.Text>
-          <Card.Text className="mt-3">Role : {profileData.role}</Card.Text>
+          <Card.Text className="mt-4">Email : {profileData.email}</Card.Text>
+          <Card.Text className="mt-4">Role : {profileData.role}</Card.Text>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary mt-3"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
             onClick={() => handleEdit()}
@@ -38,7 +38,7 @@ const StudProfile = () => {
             Edit Profile
           </button>
           <button
-            className="btn btn-primary mx-5"
+            className="btn btn-primary mx-5 mt-3"
             onClick={() => navigate("/resetpassword")}
           >
             Reset Password

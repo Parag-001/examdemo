@@ -7,13 +7,7 @@ import {
   nextQuestion,
   previousQuestion,
 } from "../Redux/Action/CreateExam";
-import {
-  clickVali,
-  nextValue,
-  prevValue,
-  resetForm,
-} from "../Redux/Action/SignUpaction";
-import ClickValidation from "../Validation/ClickVali";
+import { nextValue, prevValue, resetForm } from "../Redux/Action/SignUpaction";
 
 import FormInput from "./FormInput";
 

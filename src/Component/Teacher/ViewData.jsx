@@ -19,7 +19,7 @@ const ViewData = () => {
                 <div className="row g-0">
                   <div className="col-md-4 ">
                     <Card style={{ width: "20rem", height: "37rem" }}>
-                      <Card.Img variant="top" src="./pro2.png" />
+                      <Card.Img variant="top" src="./pro3.jpeg" />
                       <Card.Body className="mt-4">
                         <Card.Title>Name : {c.name}</Card.Title>
                         <Card.Text className="mt-4">

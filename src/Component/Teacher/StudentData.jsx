@@ -32,7 +32,7 @@ const StudentData = () => {
           {datalist.map((c, ind) => {
             return (
               <Card key={ind} style={{ width: "20rem" }}>
-                <Card.Img variant="top" src="./pro.jpg" />
+                <Card.Img variant="top" src="./pro3.jpeg" />
                 <Card.Body>
                   <Card.Title>Name : {c.name}</Card.Title>
                   <Card.Text className="mt-3">Email : {c.email}</Card.Text>
