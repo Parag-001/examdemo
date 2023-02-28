@@ -77,14 +77,14 @@ const SignUp = () => {
                     val={["select", "teacher", "student"]}
                   />
                 </div>
-                <div className="d-flex justify-content-between align-items-center">
+                {/* <div className="d-flex justify-content-between align-items-center">
                   <NavLink
                     className="text-decoration-none text-primary"
                     to="/ForgetPassword"
                   >
                     Forgot Password
                   </NavLink>
-                </div>
+                </div> */}
 
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button className="btn btn-lg btn-info" type="submit">

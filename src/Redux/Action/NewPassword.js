@@ -1,6 +1,5 @@
 import axios from "axios"
 import swal from "sweetalert"
-import { stud_Profile } from "./AllExam"
 import { resetForm } from "./SignUpaction"
 
 export const newPassword = (token) => {
@@ -48,13 +47,5 @@ export const resetPassword = (navigate) => {
                    swal("Sorry",res.data.message, "error")
                 }
          })
-        //      const res = await data.json()
-        //  console.log('res', res)
-        //      if (res.statusCode === 200) {
-        //          swal("Super",res.message, "success")
-        //     dispatch(resetForm())
-        //      } else {
-        //              swal("Sorry",res.message, "error")
-        // }
     }
 }

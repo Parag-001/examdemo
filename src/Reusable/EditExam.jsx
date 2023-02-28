@@ -38,6 +38,7 @@ const EditExamData = () => {
     .some((a) => a !== "");
   const valcheck = Object.values(val).every((c) => c === "");
   const va = Object.values(val).every((c) => c === "");
+
   const handleNext = (e) => {
     e.preventDefault();
     va && dispatch(clickVali(ClickValidation(val), questionno));
@@ -95,7 +96,6 @@ const EditExamData = () => {
         denyButtonText: `Don't save`,
       })
       .then((result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           swal.fire("Saved!", "", "success");
           dispatch(

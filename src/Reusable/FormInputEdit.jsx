@@ -25,7 +25,7 @@ const FormInputEdit = (prop) => {
   } = prop;
   const dispatch = useDispatch();
   const { val, eror, questionError } = useSelector((stat) => stat.SignUp);
-  const { Edit_bool, questionno, singleData, subjectName } = useSelector(
+  const { Edit_bool, questionno, singleData } = useSelector(
     (stat) => stat.ExamData
   );
   const handleChange = (e) => {

@@ -11,10 +11,10 @@ const ViewData = () => {
         {console.log("viewData", viewData)}
         {viewData.map((c, ind) => {
           return (
-            <div key={ind}>
+            <div key={ind} className="studdata">
               <div
                 className="card mb-3 mt-5 mx-5"
-                style={{ maxWidth: "1140px", height: "100%" }}
+                style={{ maxWidth: "1140px", maxHeight: "150vh" }}
               >
                 <div className="row g-0">
                   <div className="col-md-4 ">
