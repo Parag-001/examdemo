@@ -33,6 +33,9 @@ const EditExam = () => {
               "Sankrit11",
               "Socil Science11",
               "ab-1",
+              "BA-TY",
+              "BA-FY",
+              "BA-SY",
             ]}
           />
           {element}

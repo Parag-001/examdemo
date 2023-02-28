@@ -14,7 +14,8 @@ const user = {
     option4: "",
     note: "",
     id: "",
-    studanswer: ""
+    studanswer: "",
+    oldpassword: ""
 }
 const initialData = {
     val: {...user},

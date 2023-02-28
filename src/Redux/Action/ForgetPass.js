@@ -4,7 +4,7 @@ import { resetForm } from "./SignUpaction"
 export const handlePass = () => {
      return async (dispatch, getState) => {
         const state = getState()
-        const data = await fetch('https://examination.onrender.com/users/ForgotPassword', {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/users/ForgotPassword`, {
             method: "POST",
             body: JSON.stringify({  
                 email: state.SignUp.val.email,

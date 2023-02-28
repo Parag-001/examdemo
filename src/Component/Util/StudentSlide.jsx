@@ -27,6 +27,11 @@ const StudentSlide = ({ children }) => {
                 Student
               </li>
               <li>
+                <NavLink className="navlinks" to="/student">
+                  DashBoard
+                </NavLink>
+              </li>
+              <li>
                 <NavLink className="navlinks" to="/viewallexam">
                   AllExam
                 </NavLink>

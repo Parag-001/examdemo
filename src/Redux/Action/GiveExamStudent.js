@@ -6,7 +6,7 @@ export const give_Exam = (id,navigate) => {
     localStorage.setItem("id",id)
     return async (dispatch, getState) => {
         const state = getState()
-        const data = await fetch(`https://examination.onrender.com/student/examPaper?id=${id}`, {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/student/examPaper?id=${id}`, {
             method: "GET",
             headers: {
                 "access-token" : JSON.parse(token)
@@ -45,7 +45,7 @@ export const submitExam = (id1,answer,navigate) => {
         const id = localStorage.getItem("id")
         const state = getState()
         const token = localStorage.getItem("token")
-         await axios.post(`https://examination.onrender.com/student/giveExam?id=${id}`,state.Give_Exam_Paper.studData,{
+         await axios.post(`${process.env.REACT_APP_DATA}/student/giveExam?id=${id}`,state.Give_Exam_Paper.studData,{
                  headers: {
                      "access-token": JSON.parse(token),
                  }

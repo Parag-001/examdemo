@@ -1,8 +1,10 @@
 import axios from "axios"
+import swal from "sweetalert"
+import { resetForm } from "./SignUpaction"
 export const allExamData = () => {
     return async (dispatch, getstate) => {
          const token = localStorage.getItem("token")
-       await axios.get(`https://examination.onrender.com/student/studentExam`, {
+       await axios.get(`${process.env.REACT_APP_DATA}/student/studentExam`, {
             headers: {
                 "access-token": JSON.parse(token)
             }
@@ -19,7 +21,7 @@ export const allExamData = () => {
 export const stud_Profile = () => {
         return async (dispatch, getstate) => {
          const token = localStorage.getItem("token")
-       await axios.get(`https://examination.onrender.com/student/getStudentDetail`, {
+       await axios.get(`${process.env.REACT_APP_DATA}/student/getStudentDetail`, {
             headers: {
                 "access-token": JSON.parse(token)
             }
@@ -38,7 +40,7 @@ export const edit_Profile = (navigate) => {
      return async (dispatch, getState) => {
          const token = localStorage.getItem("token")
          const state = getState()
-         await axios.put(`https://examination.onrender.com/student/studentProfile`, {
+         await axios.put(`${process.env.REACT_APP_DATA}/student/studentProfile`, {
              name: state.SignUp.val.name,
          },
              {
@@ -46,11 +48,15 @@ export const edit_Profile = (navigate) => {
                 "access-token": JSON.parse(token)
             },
              }).then((res) => {
-            console.log('res', res)
-            navigate('/studprofile')
-             }).catch((err) => {
-            console.log('err', err)
-        })
+            if (res.data.statusCode === 200) {
+                 swal("Super", res.data.message, "success")
+                 navigate('/studprofile')
+                dispatch(resetForm())
+                   dispatch(stud_Profile());
+             } else {
+                   swal("Sorry",res.data.message, "error")
+                }     
+             })
         dispatch({
             // type: "STUDENT_PROFILE",
             // payload: res.data

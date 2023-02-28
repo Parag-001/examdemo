@@ -19,6 +19,7 @@ import EditExam from '../Component/Teacher/EditExam'
 import ViewAllExam from '../Component/Student/ViewAllExam'
 import ExamPaper from '../Component/Student/ExamPaper'
 import StudProfile from '../Component/Student/StudProfile'
+import ResetPassword from '../Component/User/ResetPassword'
 
 const AllRoute = () => {
     const data = localStorage.getItem("role")
@@ -133,6 +134,10 @@ const AllRoute = () => {
     {
       path: "/newPassword",
       element: <NewPass />,
+    },
+    {
+      path: "/resetpassword",
+      element: <ResetPassword />,
     },
 
     {

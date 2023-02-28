@@ -5,7 +5,12 @@ const StudentDashBoard = () => {
   const { data } = useSelector((stat) => stat.Login);
   return (
     <>
-      <h1 className="text-center">Welcome {data.name}</h1>
+      <img
+        className="img-fluid"
+        style={{ height: "88vh", width: "95vw" }}
+        src="./dash.avif"
+        alt=""
+      />
     </>
   );
 };

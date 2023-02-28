@@ -37,6 +37,12 @@ const StudProfile = () => {
           >
             Edit Profile
           </button>
+          <button
+            className="btn btn-primary mx-5"
+            onClick={() => navigate("/resetpassword")}
+          >
+            Reset Password
+          </button>
         </Card.Body>
       </Card>
       <div

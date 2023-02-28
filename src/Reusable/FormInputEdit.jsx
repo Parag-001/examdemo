@@ -25,7 +25,7 @@ const FormInputEdit = (prop) => {
   } = prop;
   const dispatch = useDispatch();
   const { val, eror, questionError } = useSelector((stat) => stat.SignUp);
-  const { Edit_bool, questionno, singleData } = useSelector(
+  const { Edit_bool, questionno, singleData, subjectName } = useSelector(
     (stat) => stat.ExamData
   );
   const handleChange = (e) => {
@@ -35,7 +35,7 @@ const FormInputEdit = (prop) => {
     dispatch(changeData(e.target.value, e.target.name));
   };
   useEffect(() => {
-    Edit_bool && questionno === 0 && dispatch(first_Value(singleData[0]));
+    questionno === 0 && dispatch(first_Value(singleData[0]));
   }, []);
   const element =
     prop.element === "input" ? (

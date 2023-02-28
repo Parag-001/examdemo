@@ -1,16 +1,15 @@
 import React from "react";
-import FormInput from "../../Reusable/FormInput";
-import { newPassword } from "../../Redux/Action/NewPassword";
 import { useDispatch } from "react-redux";
-import { useLocation, NavLink } from "react-router-dom";
-const NewPass = () => {
-  const dispatch = useDispatch();
-  const location = new URLSearchParams(useLocation().search);
-  const token = location.get("token");
+import { NavLink, useNavigate } from "react-router-dom";
+import { resetPassword } from "../../Redux/Action/NewPassword";
+import FormInput from "../../Reusable/FormInput";
 
-  const handleNewPass = (e) => {
+const ResetPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(newPassword(token));
+    dispatch(resetPassword(navigate));
   };
   return (
     <>
@@ -28,18 +27,26 @@ const NewPass = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form onSubmit={handleNewPass}>
+              <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                  <h4 className="text-center fw-normal mb-5">
-                    Set New Password
-                  </h4>
+                  <h4 className="text-center fw-normal mb-5">Reset Password</h4>
+                </div>
+                <div className="form-outline mb-4">
+                  <FormInput
+                    Label="Old Password : "
+                    element="input"
+                    type="password"
+                    place="Enter Your Old Password Here "
+                    name="oldpassword"
+                    nameclass="form-control"
+                  />
                 </div>
                 <div className="form-outline mb-4">
                   <FormInput
                     Label="Password : "
                     element="input"
                     type="password"
-                    place="Enter Your Password Here "
+                    place="Enter Your New PassWord Here "
                     name="password"
                     nameclass="form-control"
                   />
@@ -49,7 +56,7 @@ const NewPass = () => {
                     Label=" Confirm Password : "
                     type="password"
                     element="input"
-                    place="Enter Your Confirm Password Here "
+                    place="Enter Confirm Passwod  "
                     name="confirmpass"
                     nameclass="form-control"
                   />
@@ -59,14 +66,14 @@ const NewPass = () => {
                   <button className="btn btn-info" type="submit">
                     Change
                   </button>
-                  <button className="btn btn-info mx-3" type="submit">
+                  {/* <button className="btn btn-info mx-3" type="submit">
                     <NavLink
                       className="text-decoration-none text-dark"
                       to="/login"
                     >
                       Back Login
                     </NavLink>
-                  </button>
+                  </button> */}
                 </div>
               </form>
             </div>
@@ -77,4 +84,4 @@ const NewPass = () => {
   );
 };
 
-export default NewPass;
+export default ResetPassword;

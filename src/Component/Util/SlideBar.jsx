@@ -21,12 +21,18 @@ const SlideBar = ({ children }) => {
         <div className="row">
           <div
             className="col-md-2"
-            style={{ height: "105vh", background: "rgb(168, 224, 211)" }}
+            style={{ height: "100vh", background: "rgb(168, 224, 211)" }}
           >
             <ul>
               <li className="mt-4">
                 <GiTeacher className="mx-3 fs-3" />
                 Teacher
+              </li>
+              <li>
+                <NavLink className="navlinks" to="/teacherdashboard">
+                  <IoIosPeople className="mx-2 fs-3" />
+                  DashBoard
+                </NavLink>
               </li>
               <li>
                 <NavLink className="navlinks" to="/studentData">

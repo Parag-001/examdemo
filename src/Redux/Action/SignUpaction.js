@@ -15,7 +15,7 @@ export const handleSubmit = (nav) => {
     
     return async (dispatch, getState) => {
         const state = getState()
-        const data = await fetch('https://examination.onrender.com/users/SignUp', {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/users/SignUp`, {
             method: "POST",
             body: JSON.stringify({
                 name: state.SignUp.val.name,

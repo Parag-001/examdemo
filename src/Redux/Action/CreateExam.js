@@ -10,7 +10,7 @@ export const handle_Exam = (ques, o1, o2, o3, o4, answer,note,navigate) => {
         dispatch(nextQuestion(ques, o1, o2, o3, o4, answer,note))
         const token = localStorage.getItem("token")
         const state = getState()
-        const data = await fetch('https://examination.onrender.com/dashboard/Teachers/Exam', {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/dashboard/Teachers/Exam`, {
             method: "POST",
             body: JSON.stringify({
                 subjectName: state.ExamData.subjectName[0],
@@ -42,7 +42,7 @@ export const handle_Edit_Exam = (ques, o1, o2, o3, o4, answer, note,navigate) =>
         dispatch(nextQuestion(ques, o1, o2, o3, o4, answer,note))
         const token = localStorage.getItem("token")
         const state = getState()
-        const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/editExam?id=${id}`, {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/dashboard/Teachers/editExam?id=${id}`, {
             method: "PUT",
             body: JSON.stringify({
                 subjectName: state.ExamData.subjectName[0],
@@ -75,7 +75,7 @@ export const particular_Exam = (id, navigate, nav, sub,note) => {
     const token = localStorage.getItem("token")
     localStorage.setItem("id", id)
     return async(dispatch,getState) => {
-        const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/examDetail?id=${id}`, {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/dashboard/Teachers/examDetail?id=${id}`, {
             method: "GET",
             headers: {
                 "access-token": JSON.parse(token)
@@ -107,7 +107,7 @@ export const deleteData = (id) => {
     const token = localStorage.getItem("token")
     return async (dispatch, getState) => {
         const state = getState()
-        const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/deleteExam?id=${id}`, {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/dashboard/Teachers/deleteExam?id=${id}`, {
             method: "DELETE",
             headers: {
                 "access-token" : JSON.parse(token)
@@ -151,7 +151,7 @@ export const previousQuestion = (val) => {
 export const viewExamDetail = (val) => {
        return async (dispatch, getstate) => {
         const token = localStorage.getItem("token")
-        const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/viewExam`, {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/dashboard/Teachers/viewExam`, {
             method: "GET",
             headers: {
                 "access-token": JSON.parse(token)

@@ -1,7 +1,7 @@
 export const studentDataShow = () => {
     const token = localStorage.getItem("token")
     return async (dispatch, getState) => {
-        const data = await fetch('https://examination.onrender.com/dashboard/Teachers', {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/dashboard/Teachers`, {
             method: "GET",
             headers: {
                 "access-token": JSON.parse(token)
@@ -18,7 +18,7 @@ export const studentDataShow = () => {
 export const particular_Data = (id,navigate) => {
     const token = localStorage.getItem("token")
     return async(dispatch,getState) => {
-        const data = await fetch(`https://examination.onrender.com/dashboard/Teachers/viewStudentDetail?id=${id}`, {
+        const data = await fetch(`${process.env.REACT_APP_DATA}/dashboard/Teachers/viewStudentDetail?id=${id}`, {
             method: "GET",
             headers: {
                 "access-token": JSON.parse(token)

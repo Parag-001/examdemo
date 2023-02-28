@@ -6,7 +6,12 @@ const TeacherDashBoard = () => {
   console.log("isLogin", isLogin);
   return (
     <>
-      <h2 className="text-secondary text-center mt-2">Welcome {data.name}</h2>
+      <img
+        className="img-fluid"
+        style={{ height: "88vh", width: "95vw" }}
+        src="./dash.avif"
+        alt=""
+      />
     </>
   );
 };
